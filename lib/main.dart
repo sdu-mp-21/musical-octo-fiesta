@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hi Nursultan!'),
+        title: Text('Hi Maira'),
       ),
       body: Column(
         children: [
