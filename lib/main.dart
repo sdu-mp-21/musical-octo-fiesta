@@ -82,6 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String $(String arr) {}
 }
 
+class Profile {}
+
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(

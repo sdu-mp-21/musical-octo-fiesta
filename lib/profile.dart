@@ -2,12 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -24,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key, required String title}) : super(key: key);
+  const MyHomePage({key, title}) : super(key: key);
 
   get image => null;
 
