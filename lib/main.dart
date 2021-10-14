@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final arr = [
     Home(),
     Search(),
-    Item(),
+    MyItemPage(),
     Profile(),
     Basket(),
   ];
