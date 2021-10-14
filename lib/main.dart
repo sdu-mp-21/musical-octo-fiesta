@@ -3,6 +3,7 @@ import 'search.dart';
 import 'item.dart';
 import 'home.dart';
 import 'basket.dart';
+import 'profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -78,8 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-class Profile {}
 
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
