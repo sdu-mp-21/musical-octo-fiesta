@@ -11,13 +11,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {
-        Home.route: (context) => Home(),
-        Search.route: (context) => Search(),
-        Item.route: (context) => Item(),
-        Profile.route: (context) => Profile(),
-      },
-      initialRoute: '/',
       theme: _buildShrineTheme(),
       title: 'Flutter Demo',
       home: MyHomePage(),
@@ -74,6 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             title: Text('Log in'),
             icon: Icon(Icons.person),
+          ),
+          BottomNavigationBarItem(
+            title: Text('Basket'),
+            icon: Icon(Icons.shopping_basket),
           ),
         ],
       ),
