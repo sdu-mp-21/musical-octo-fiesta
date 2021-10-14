@@ -1,15 +1,19 @@
 import "package:flutter/material.dart";
+import 'main.dart';
 
 class Basket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
         title: Text('Error'),
-        content: Text('Your basket is empty!!!'),
+        content: const Text('Your basket is empty!!!'),
         actions: [
-          TextButton(
-              child: Text('Close'),
-              onPressed: () => Navigator.of(context).pop())
+          FlatButton(
+              child: Text('ok'),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => MyHomePage()));
+              })
         ]);
   }
 }
