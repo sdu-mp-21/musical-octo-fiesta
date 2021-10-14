@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'search.dart';
+import 'item.dart';
+import 'profile.dart';
+import 'home.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,6 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: {
+        Home.route: (context) => Home(),
+        Search.route: (context) => Search(),
+        Item.route: (context) => Item(),
+        Profile.route: (context) => Profile(),
+      },
+      initialRoute: '/',
       theme: _buildShrineTheme(),
       title: 'Flutter Demo',
       home: MyHomePage(),
@@ -20,26 +32,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
+  final arr = [
+    Home(),
+    Search(),
+    Item(),
+    Profile(),
+  ];
 
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text(
-                "Book",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-              ),
-            ),
-            Image.asset('assets/images/baner.png'),
-          ],
-        ),
-      ),
+      body: arr[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
@@ -50,7 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
         unselectedLabelStyle: textTheme.caption,
         onTap: (value) {
           // Respond to item press.
-          setState(() => _currentIndex = value);
+          setState(() {
+            _currentIndex = value;
+          });
         },
         items: [
           BottomNavigationBarItem(
@@ -62,13 +68,19 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.search),
           ),
           BottomNavigationBarItem(
-            title: Text('Settings'),
-            icon: Icon(Icons.settings),
+            title: Text('Books'),
+            icon: Icon(Icons.book),
+          ),
+          BottomNavigationBarItem(
+            title: Text('Log in'),
+            icon: Icon(Icons.person),
           ),
         ],
       ),
     );
   }
+
+  String $(String arr) {}
 }
 
 ThemeData _buildShrineTheme() {
