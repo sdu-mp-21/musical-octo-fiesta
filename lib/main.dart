@@ -3,6 +3,7 @@ import 'search.dart';
 import 'item.dart';
 import 'profile.dart';
 import 'home.dart';
+import 'basket.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Search(),
     Item(),
     Profile(),
+    Basket(),
   ];
 
   Widget build(BuildContext context) {
