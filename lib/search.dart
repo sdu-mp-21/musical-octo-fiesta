@@ -7,7 +7,14 @@ class Search extends StatelessWidget {
       appBar: AppBar(
         title: Text('Search page'),
       ),
-      body: Text('Good Luck with page'),
+      body: TextField(
+        decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: 'Search',
+            prefixIcon: Icon(Icons.search)
+        ),
+
+      ),
     );
   }
 }
