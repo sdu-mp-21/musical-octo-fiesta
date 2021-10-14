@@ -77,8 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  String $(String arr) {}
 }
 
 class Profile {}
