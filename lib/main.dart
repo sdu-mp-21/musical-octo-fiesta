@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'search.dart';
 import 'item.dart';
-import 'profile.dart';
 import 'home.dart';
 import 'basket.dart';
 
