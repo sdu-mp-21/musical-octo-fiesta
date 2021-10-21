@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
-      title: 'Flutter Demo',
+      title: 'Books',
       home: MyHomePage(),
     );
   }
