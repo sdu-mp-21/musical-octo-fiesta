@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
+import 'package:heroicons/heroicons.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -63,19 +60,20 @@ Widget bookWidget() {
           child: Column(children: [
             Container(
               height: 200,
-              width: 120,
+              width: 150,
               decoration: BoxDecoration(
                   color: Colors.blue,
                   image: DecorationImage(
-                    image: AssetImage("assets/images/baner.png"),
-                    fit: BoxFit.contain,
+                    image: NetworkImage(
+                        "https://simg.marwin.kz/media/catalog/product/cache/8d1771fdd19ec2393e47701ba45e606d/2/2/22150614-uval-noy-harari-sapiens-kratkaya-istoriya-chelovechestva.jpg_330.jpg"),
+                    fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 7,
-                      blurRadius: 5,
+                      spreadRadius: 2,
+                      blurRadius: 10,
                       offset: Offset(0, 2), // changes position of shadow
                     ),
                   ]),
@@ -93,12 +91,57 @@ Widget bookWidget() {
           ])));
 }
 
+Widget categoryWidget({String label, bool isSelected: false}) {
+  return Container(
+    padding: EdgeInsets.all(10),
+    margin: EdgeInsets.only(right: 10),
+    child: Text(
+      label,
+      style: TextStyle(
+          color: isSelected ? Colors.white : Colors.black54,
+          fontWeight: FontWeight.bold),
+    ),
+    decoration: BoxDecoration(
+        color: isSelected ? Colors.blue : Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+            width: 1.0,
+            color: !isSelected
+                ? Color.fromRGBO(0, 0, 0, 0.1)
+                : Colors.transparent),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(isSelected ? 0.2 : 0),
+            spreadRadius: 4,
+            blurRadius: 5,
+            offset: Offset(0, 2), // changes position of shadow
+          ),
+        ]),
+  );
+}
+
 Widget _buildBody() {
   return ListView(
     scrollDirection: Axis.vertical,
     shrinkWrap: true,
     children: [
       welcomeWidget("Maira"),
+      Container(
+          height: 60,
+          child: ListView(
+            padding: EdgeInsets.all(10),
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            children: [
+              categoryWidget(label: "Fantasy", isSelected: true),
+              categoryWidget(label: "Romance"),
+              categoryWidget(label: "Mystery"),
+              categoryWidget(label: "Action and Adventure"),
+              categoryWidget(label: "Classics"),
+              categoryWidget(label: "Historical Fiction"),
+            ],
+          )),
       Container(
           height: 300,
           child: ListView(
@@ -112,7 +155,7 @@ Widget _buildBody() {
               bookWidget(),
               bookWidget(),
             ],
-          ))
+          )),
     ],
   );
 }
