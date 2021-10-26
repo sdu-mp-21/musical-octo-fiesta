@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:heroicons/heroicons.dart';
 import 'search.dart';
 import 'item.dart';
 import 'home.dart';
@@ -55,24 +57,20 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         items: [
           BottomNavigationBarItem(
-            title: Text('Home'),
-            icon: Icon(Icons.home),
+            label: 'Home',
+            icon: HeroIcon(HeroIcons.home),
           ),
           BottomNavigationBarItem(
-            title: Text('Search'),
-            icon: Icon(Icons.search),
+            label: 'Search',
+            icon: HeroIcon(HeroIcons.search),
           ),
           BottomNavigationBarItem(
-            title: Text('Books'),
-            icon: Icon(Icons.book),
+            label: 'Cart',
+            icon: HeroIcon(HeroIcons.shoppingCart),
           ),
           BottomNavigationBarItem(
-            title: Text('Log in'),
-            icon: Icon(Icons.person),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Basket'),
-            icon: Icon(Icons.shopping_basket),
+            label: 'Basket',
+            icon: HeroIcon(HeroIcons.userCircle),
           ),
         ],
       ),

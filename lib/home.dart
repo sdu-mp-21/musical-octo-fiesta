@@ -11,77 +11,121 @@ class Home extends StatefulWidget {
   _HomeWidgetState createState() => _HomeWidgetState();
 }
 
-class Book {
-  String title, price, image;
-  Book({String title, String price, String image}) {
-    this.title = title;
-    this.price = price;
-    this.image = image;
-  }
-  @override
-  String toString() {
-    return "$title $price $image";
-  }
-}
-
-Future<List<Book>> getBooks(query) async {
-  List<Book> books = [];
-  var url = Uri.https('api.itbook.store', '/1.0/search/$query');
-  var response = await http.get(url);
-
-  if (response.statusCode == 200) {
-    var jsonResponse =
-        convert.jsonDecode(response.body) as Map<String, dynamic>;
-    for (var jsonBook in jsonResponse["books"]) {
-      Book book = new Book(
-          title: jsonBook["title"],
-          price: jsonBook["price"],
-          image: jsonBook["image"]);
-      books.add(book);
-    }
-  } else {
-    print('Request failed with status: ${response.statusCode}.');
-  }
-  return books;
-}
-
-Widget BooksWidget(List<Book> books) {
-  List<Widget> list = [];
-  for (Book book in books) {
-    list.add(BookWidget(book));
-  }
-  return ListView(padding: const EdgeInsets.all(8), children: list);
-}
-
-Widget BookWidget(Book book) {
+Widget welcomeWidget(String firstName) {
   return Container(
-    height: 100,
-    child: Row(
-      children: [
-        Image.network(book.image, fit: BoxFit.fitHeight),
-        Text(book.title, overflow: TextOverflow.ellipsis)
-      ],
-    ),
+      padding: EdgeInsets.all(10),
+      child: ClipRRect(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            image: DecorationImage(
+              image: AssetImage("assets/images/08.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Hello, $firstName!",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Which book suits your current mood?",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
+          ),
+        ),
+        borderRadius: BorderRadius.circular(14),
+      ));
+}
+
+Widget bookWidget() {
+  return Padding(
+      padding: EdgeInsets.all(10),
+      child: SizedBox(
+          width: 120,
+          height: 200,
+          child: Column(children: [
+            Container(
+              height: 200,
+              width: 120,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/baner.png"),
+                    fit: BoxFit.contain,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 7,
+                      blurRadius: 5,
+                      offset: Offset(0, 2), // changes position of shadow
+                    ),
+                  ]),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "The Popply War",
+              style: TextStyle(fontWeight: FontWeight.w800),
+            ),
+            Text("R.F. Kuang",
+                style: TextStyle(
+                    color: Colors.black54, fontWeight: FontWeight.w600))
+          ])));
+}
+
+Widget _buildBody() {
+  return ListView(
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    children: [
+      welcomeWidget("Maira"),
+      Container(
+          height: 300,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            children: [
+              bookWidget(),
+              bookWidget(),
+              bookWidget(),
+              bookWidget(),
+              bookWidget(),
+            ],
+          ))
+    ],
   );
 }
 
 class _HomeWidgetState extends State<Home> {
-  List<Book> books = [];
-
   @override
   Widget build(BuildContext context) {
-    const List<String> bookNames = ["mongodb", "google", "react", "interview"];
-    var random = new Random();
-    String randomBookName = bookNames[random.nextInt(bookNames.length)];
-    return SafeArea(
-        child: FutureBuilder(
-            future: getBooks(randomBookName),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                // Future hasn't finished yet, return a placeholder
-                return Center(child: Text('Loading...'));
-              }
-              return BooksWidget(snapshot.data);
-            }));
+    return SafeArea(child: FutureBuilder(builder: (context, snapshot) {
+      // if (!snapshot.hasData) {
+      //   // Future hasn't finished yet, return a placeholder
+      //   return Center(child: Text('Loading...'));
+      // }
+      return _buildBody();
+    }));
   }
 }
