@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 
@@ -140,6 +141,28 @@ class _HomeWidgetState extends State<Home> {
     );
   }
 
+  Widget _showMoreWidget() {
+    return Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                  color: Colors.blue.shade500,
+                  borderRadius: BorderRadius.circular(18)),
+              alignment: Alignment.center,
+              child: HeroIcon(HeroIcons.arrowRight, color: Colors.white),
+            ),
+            SizedBox(height: 4),
+            Text("Показать все", style: TextStyle(fontWeight: FontWeight.w500))
+          ],
+        ));
+  }
+
   Widget _buildBody() {
     return ListView(
       scrollDirection: Axis.vertical,
@@ -163,7 +186,7 @@ class _HomeWidgetState extends State<Home> {
               ],
             )),
         Container(
-            height: 300,
+            height: 246,
             child: ListView(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
@@ -175,6 +198,7 @@ class _HomeWidgetState extends State<Home> {
                     rating: "7.8",
                     image:
                         "https://m.media-amazon.com/images/I/51WOq1TRGdL.jpg"),
+                _showMoreWidget()
               ],
             )),
       ],
