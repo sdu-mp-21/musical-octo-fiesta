@@ -30,6 +30,7 @@ flutter:
     - assets/images/baner.png
     - assets/images/08.png
     - assets/images/atomichabits.jpg
+    - assets/images/pctr.jpg
     
   # To add assets to your application, add an assets section, like this:
   # assets:
