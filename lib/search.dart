@@ -22,14 +22,7 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Search',
-      theme: new ThemeData(
-        primarySwatch: Colors.grey,
-        primaryTextTheme: TextTheme(
-            headline6: TextStyle(
-                color: Colors.black
-            )
-        )
-    ),
+      theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFFFFFF)),
       home: new MyHomePage(title: 'Search',),
     );
   }
@@ -99,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title,style: new TextStyle(color: Colors.white)),
       ),
       body: new Container(
+
         padding: new EdgeInsets.all(8.0),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -109,14 +103,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.black
               ),
               decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
                 filled: true,
-                fillColor: Color.fromRGBO(239, 239, 239, 1),
+
+                  hintText: 'Search titles, topics, or authors',
+                fillColor: Colors.grey[100],
                 border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                    borderSide: BorderSide(
+                      color : const Color(0xFF000000),
+                    ),
                     borderRadius: BorderRadius.circular(8)
                 ),
               ),
               onChanged: (string) => (subject.add(string)),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween  ,
+              children:<Widget> [
+
+                Text('Recent',style:TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+                Text('Clear all',style:TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,)),
+              ],
             ),
             _isLoading? new CircularProgressIndicator(): new Container(),
             new Expanded(
