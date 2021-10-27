@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/bookpage.dart';
 import 'package:heroicons/heroicons.dart';
 
 class Home extends StatefulWidget {
@@ -59,67 +60,75 @@ class _HomeWidgetState extends State<Home> {
   }
 
   Widget _bookWidget({title, author, rating, image}) {
-    return Padding(
-        padding: EdgeInsets.all(10),
-        child: Stack(children: [
-          SizedBox(
-              width: 120,
-              height: 230,
-              child: Column(children: [
-                Container(
-                  height: 180,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      image: DecorationImage(
-                        image: NetworkImage(image),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 2,
-                          blurRadius: 10,
-                          offset: Offset(0, 2), // changes position of shadow
-                        ),
-                      ]),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  title,
-                  style: TextStyle(fontWeight: FontWeight.w800),
-                ),
-                Text(author,
-                    style: TextStyle(
-                        color: Colors.black54, fontWeight: FontWeight.w600))
-              ])),
-          Positioned(
-              top: 10,
-              left: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade500,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      rating,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                          color: Colors.white),
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BookPage()),
+          );
+        },
+        child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Stack(children: [
+              SizedBox(
+                  width: 120,
+                  height: 230,
+                  child: Column(children: [
+                    Container(
+                      height: 180,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          image: DecorationImage(
+                            image: NetworkImage(image),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.1),
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              offset:
+                                  Offset(0, 2), // changes position of shadow
+                            ),
+                          ]),
                     ),
-                  ],
-                ),
-              )),
-        ]));
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      title,
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                    Text(author,
+                        style: TextStyle(
+                            color: Colors.black54, fontWeight: FontWeight.w600))
+                  ])),
+              Positioned(
+                  top: 10,
+                  left: 0,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade500,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          rating,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  )),
+            ])));
   }
 
   Widget _categoryWidget({String label, int index}) {
