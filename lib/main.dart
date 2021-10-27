@@ -31,9 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final arr = [
     Home(),
     Search(),
-    MyItemPage(),
-    Profile(),
     Basket(),
+    Profile(),
   ];
 
   Widget build(BuildContext context) {
@@ -65,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: HeroIcon(HeroIcons.search),
           ),
           BottomNavigationBarItem(
-            label: 'Cart',
+            label: 'Basket',
             icon: HeroIcon(HeroIcons.shoppingCart),
           ),
           BottomNavigationBarItem(
