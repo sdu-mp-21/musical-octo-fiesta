@@ -1,4 +1,4 @@
-name: Book Store
+name: BookStore
 description: Next gen book store. 
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
