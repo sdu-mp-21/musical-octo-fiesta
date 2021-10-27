@@ -10,6 +10,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<Home> {
+  int currentGenre = 0;
+  List<String> genres = [
+    "All",
+    "Fantasy",
+    "Mistery",
+    "Action and Adventure",
+    "Classics",
+    "Historical Fiction"
+  ];
+
   Widget _welcomeWidget(String firstName) {
     return Container(
         margin: EdgeInsets.all(10),
@@ -112,33 +122,38 @@ class _HomeWidgetState extends State<Home> {
         ]));
   }
 
-  Widget _categoryWidget({String label, bool isSelected: false}) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(right: 10),
-      child: Text(
-        label,
-        style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black54,
-            fontWeight: FontWeight.bold),
-      ),
-      decoration: BoxDecoration(
-          color: isSelected ? Colors.blue : Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-              width: 1.0,
-              color: !isSelected
-                  ? Color.fromRGBO(0, 0, 0, 0.1)
-                  : Colors.transparent),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(isSelected ? 0.2 : 0),
-              spreadRadius: 4,
-              blurRadius: 5,
-              offset: Offset(0, 2), // changes position of shadow
-            ),
-          ]),
-    );
+  Widget _categoryWidget({String label, int index}) {
+    bool isSelected = index == currentGenre;
+    return GestureDetector(
+        onTap: () => setState(() {
+              currentGenre = index;
+            }),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.only(right: 10),
+          child: Text(
+            label,
+            style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black54,
+                fontWeight: FontWeight.bold),
+          ),
+          decoration: BoxDecoration(
+              color: isSelected ? Colors.blue : Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                  width: 1.0,
+                  color: !isSelected
+                      ? Color.fromRGBO(0, 0, 0, 0.1)
+                      : Colors.transparent),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(isSelected ? 0.2 : 0),
+                  spreadRadius: 4,
+                  blurRadius: 5,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ]),
+        ));
   }
 
   Widget _showMoreWidget() {
@@ -172,19 +187,14 @@ class _HomeWidgetState extends State<Home> {
         Container(
             height: 60,
             child: ListView(
-              padding: EdgeInsets.all(10),
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              children: [
-                _categoryWidget(label: "Fantasy", isSelected: true),
-                _categoryWidget(label: "Romance"),
-                _categoryWidget(label: "Mystery"),
-                _categoryWidget(label: "Action and Adventure"),
-                _categoryWidget(label: "Classics"),
-                _categoryWidget(label: "Historical Fiction"),
-              ],
-            )),
+                padding: EdgeInsets.all(10),
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                children: [
+                  for (var i = 0; i < genres.length; i++)
+                    _categoryWidget(label: genres[i], index: i)
+                ])),
         Container(
             height: 246,
             child: ListView(
