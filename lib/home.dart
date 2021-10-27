@@ -201,7 +201,7 @@ class _HomeWidgetState extends State<Home> {
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       children: [
-        _welcomeWidget("Maira"),
+        _welcomeWidget("Tom"),
         Container(
             height: 60,
             child: ListView(

@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: HeroIcon(HeroIcons.shoppingCart),
           ),
           BottomNavigationBarItem(
-            label: 'Basket',
+            label: 'Profile',
             icon: HeroIcon(HeroIcons.userCircle),
           ),
         ],
