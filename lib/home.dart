@@ -1,7 +1,7 @@
+import 'package:BookStore/bookpage.dart';
+import 'package:BookStore/books.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/bookpage.dart';
-import 'package:flutter_application_2/books.dart';
 import 'package:heroicons/heroicons.dart';
 
 class Home extends StatefulWidget {
