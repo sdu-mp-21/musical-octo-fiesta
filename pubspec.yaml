@@ -32,11 +32,11 @@ flutter:
     - assets/images/08.png
     - assets/images/atomichabits.jpg
     - assets/images/pctr.jpg
-    - assets/image/johnny.jpg
-    - assets/image/nursultan.jfif
-    - assets/image/piter.jpeg
-    - assets/image/tauekel.jfif
-    - assets/image/tom.jpg
+    - assets/images/johnny.jpg
+    - assets/images/nursultan.jfif
+    - assets/images/piter.jpeg
+    - assets/images/tauekel.jfif
+    - assets/images/tom.jpg
     - assets/users.json
   
     
