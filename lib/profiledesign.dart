@@ -38,13 +38,50 @@ class _MyProfileDesign extends State<ProfileDesign> {
         actions: const [Icon(Icons.more_vert)],
       ),
       body: Container(
-        child: Container(
-          margin: EdgeInsets.only(top: 30),
-          padding: EdgeInsets.all(20),
-          child: CircleAvatar(
-            radius: 80,
-            backgroundImage: AssetImage('assets/images/pctr.jpg'),
-          ),
+        child: Column(
+          children: const [
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                "Tom Holland",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage('assets/images/pctr.jpg'),
+                ),
+              ),
+            ),
+            Text("I love books"),
+            Center(
+              child: ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextButton(
+                    onPressed: null,
+                    child: Text(
+                      'Books 136',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: null,
+                    child: Text(
+                      '24 y.o.',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
