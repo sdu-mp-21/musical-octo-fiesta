@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Home(),
     Search(),
     Basket(),
-    Profile(),
+    ProfileDesign(),
   ];
 
   Widget build(BuildContext context) {
