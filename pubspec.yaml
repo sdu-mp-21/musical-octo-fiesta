@@ -32,6 +32,14 @@ flutter:
     - assets/images/08.png
     - assets/images/atomichabits.jpg
     - assets/images/pctr.jpg
+    - assets/image/johnny.jpg
+    - assets/image/nursultan.jfif
+    - assets/image/piter.jpeg
+    - assets/image/tauekel.jfif
+    - assets/image/tom.jpg
+    - assets/users.json
+  
+    
     
   # To add assets to your application, add an assets section, like this:
   # assets:
