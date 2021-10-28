@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
+import 'profiledesign.dart';
 import 'search.dart';
-import 'item.dart';
 import 'home.dart';
 import 'basket.dart';
 import 'profile.dart';
@@ -31,8 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final arr = [
     Home(),
     Search(),
-    Basket(),
     ProfileDesign(),
+    Profile(),
   ];
 
   Widget build(BuildContext context) {
