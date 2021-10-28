@@ -39,6 +39,9 @@ flutter:
     - assets/images/tom.jpg
     - assets/images/profilewallpaper.jpg
     - assets/users.json
+    - assets/images/why.jpg
+    - assets/images/today.jpg
+    - assets/images/zerotoone.jpg
     
   
     

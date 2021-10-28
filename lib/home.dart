@@ -65,7 +65,7 @@ class _HomeWidgetState extends State<Home> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => BookPage()),
+            MaterialPageRoute(builder: (context) => MyItemPage()),
           );
         },
         child: Padding(
