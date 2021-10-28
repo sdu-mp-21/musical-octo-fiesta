@@ -11,78 +11,25 @@ class _MyProfileDesign extends State<ProfileDesign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 200,
-        title: const Text(
-          "@tomholland",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        centerTitle: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xff7c94b6),
-            image: const DecorationImage(
-              image: AssetImage('assets/images/profilewallpaper.jpg'),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        elevation: 15,
-        backgroundColor: const Color(0xFF29B6F6),
-        actions: const [Icon(Icons.more_vert)],
-      ),
-      body: Container(
-        child: Column(
-          children: const [
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                "Tom Holland",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w600,
+      backgroundColor: Color(0xFF21BFBD),
+      body: ListView(
+        children: <Widget>[
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.arrow_back_ios_new_sharp),
+                  color: Colors.white,
                 ),
-              ),
-            ),
-            Center(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage('assets/images/pctr.jpg'),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.menu),
+                  //padding: EdgeInsets.all(10),
+                  color: Colors.white,
                 ),
-              ),
-            ),
-            Text("I love books"),
-            Center(
-              child: ButtonBar(
-                alignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextButton(
-                    onPressed: null,
-                    child: Text(
-                      'Books 136',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text(
-                      '24 y.o.',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+              ]),
+        ],
       ),
     );
   }
