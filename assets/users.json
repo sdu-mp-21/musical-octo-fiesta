@@ -1,0 +1,51 @@
+[
+    {
+        "id" : 1,
+        "name" : "Johny",
+        "surname" : "Depp",
+        "login": "johny",
+        "password": "12345",
+        "image": "assets/images/johnny.jpg",
+        "age" : 26
+    },
+
+    {
+        "id" : 2,
+        "name" : "Nursultan",
+        "surname" : "Nazarbaev",
+        "login": "nursultan",
+        "password": "123456",
+        "image": "assets/images/nursultan.jfif",
+        "age" : 70
+    },
+
+    {
+        "id" : 3,
+        "name" : "Piter",
+        "surname" : "Hale",
+        "login": "piter",
+        "password": "1234567",
+        "image": "assets/images/piter.jpeg",
+        "age" : 40
+    },
+
+    {
+        "id" : 4,
+        "name" : "Tauekel",
+        "surname" : "Muslim",
+        "login": "tauekel",
+        "password": "12345678",
+        "image": "assets/images/tauekel.jfif",
+        "age" : 30
+    },
+
+    {
+        "id" : 5,
+        "name" : "Tom",
+        "surname" : "Hardi",
+        "login": "tom",
+        "password": "123456789",
+        "image": "assets/images/tom.jpg",
+        "age" : 35
+    }
+]
