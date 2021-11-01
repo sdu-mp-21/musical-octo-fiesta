@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:BookStore/bookpage.dart';
 import 'package:BookStore/books.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -60,12 +64,12 @@ class _HomeWidgetState extends State<Home> {
         ));
   }
 
-  Widget _bookWidget({title, author, rating, image}) {
+  Widget _bookWidget({id, title, author, rating, image}) {
     return GestureDetector(
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MyItemPage()),
+            MaterialPageRoute(builder: (context) => MyItemPage(id: id)),
           );
         },
         child: Padding(
@@ -196,7 +200,7 @@ class _HomeWidgetState extends State<Home> {
             )));
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(List<Book> books) {
     return ListView(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -220,12 +224,13 @@ class _HomeWidgetState extends State<Home> {
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
               children: [
-                _bookWidget(
-                    author: "Matthew Walker",
-                    title: "Why We Sleep",
-                    rating: "7.8",
-                    image:
-                        "https://m.media-amazon.com/images/I/51WOq1TRGdL.jpg"),
+                for (var i = 0; i < books.length; i++)
+                  _bookWidget(
+                      id: books[i].id,
+                      author: books[i].author,
+                      title: books[i].title,
+                      rating: "4.6",
+                      image: books[i].image),
                 _showMoreWidget()
               ],
             )),
@@ -233,14 +238,41 @@ class _HomeWidgetState extends State<Home> {
     );
   }
 
+  Future<List<Book>> _getBooks() async {
+    print("API call");
+    Uri uri = Uri.parse(
+        'https://run.mocky.io/v3/8f14ea83-a818-4a37-9910-3bc863d0f956');
+    var bookData = await http.get(uri);
+
+    var jsonData = json.decode(bookData.body) as Map<String, dynamic>;
+
+    List<Book> allBooks = [];
+    for (var jsonBook in jsonData["books"]["psychology"]) {
+      Book book = Book(
+          title: jsonBook["title"],
+          author: jsonBook["author"],
+          category: jsonBook["category"],
+          description: jsonBook["description"],
+          id: jsonBook["id"],
+          image: jsonBook["image"]);
+      print(book);
+      allBooks.add(book);
+    }
+    print(allBooks);
+    return allBooks;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: FutureBuilder(builder: (context, snapshot) {
-      // if (!snapshot.hasData) {
-      //   // Future hasn't finished yet, return a placeholder
-      //   return Center(child: Text('Loading...'));
-      // }
-      return _buildBody();
-    }));
+    return SafeArea(
+        child: FutureBuilder(
+            future: _getBooks(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                // Future hasn't finished yet, return a placeholder
+                return Center(child: Text('Loading...'));
+              }
+              return _buildBody(snapshot.data);
+            }));
   }
 }
