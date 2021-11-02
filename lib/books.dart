@@ -1,3 +1,4 @@
+import 'package:BookStore/models/book.dart';
 import "package:flutter/material.dart";
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -74,7 +75,7 @@ Widget buildBody() {
           author: jsonBook["author"],
           image: jsonBook["image"],
           description: jsonBook["description"],
-          category: jsonBook["category"]);
+          genre: jsonBook["genre"]);
       allBooks.add(book);
     }
 
@@ -130,21 +131,4 @@ class _MyBook extends State<Books> {
 //   }
 // }
 
-class Book {
-  final String id;
-  final String title;
-  final String author;
-  final String price;
-  final String image;
-  final String description;
-  final String category;
 
-  Book(
-      {this.id,
-      this.title,
-      this.author,
-      this.price,
-      this.image,
-      this.description,
-      this.category});
-}
