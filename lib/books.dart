@@ -1,9 +1,6 @@
 import 'package:BookStore/models/book.dart';
+import 'package:BookStore/services/books.dart';
 import "package:flutter/material.dart";
-import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:BookStore/bookpage.dart';
 
 class Books extends StatefulWidget {
   const Books({Key key, this.title}) : super(key: key);
@@ -59,35 +56,11 @@ Widget BookWidget(Book book) {
 // }
 
 Widget buildBody() {
-  Future<List<Book>> _getBooks() async {
-    Uri uri = Uri.parse(
-        'https://run.mocky.io/v3/062c0818-f92a-4363-b5dd-cab6c67262e0');
-    var bookData = await http.get(uri);
-
-    var jsonData = json.decode(bookData.body) as Map<String, dynamic>;
-
-    List<Book> allBooks = [];
-    for (var jsonBook in jsonData["books"]) {
-      Book book = Book(
-          title: jsonBook["title"],
-          id: jsonBook["id"],
-          price: jsonBook["price"],
-          author: jsonBook["author"],
-          image: jsonBook["image"],
-          description: jsonBook["description"],
-          genre: jsonBook["genre"]);
-      allBooks.add(book);
-    }
-
-    print(allBooks);
-    return allBooks;
-  }
-
   return Scaffold(
     appBar: new AppBar(),
     body: Container(
       child: FutureBuilder(
-          future: _getBooks(),
+          future: getAllBooks(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return Container(

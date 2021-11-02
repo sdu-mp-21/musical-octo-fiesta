@@ -26,7 +26,7 @@ class Book {
 
   Book.fromJson(Map<String, dynamic> json)
       : id = json["_id"],
-        rating = json["rating"],
+        rating = json["rating"].toInt(),
         pageCount = json["pageCount"],
         publisher = json["publisher"],
         language = json["language"],
