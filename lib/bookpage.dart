@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:BookStore/models/book.dart';
 import "package:flutter/material.dart";
 import 'package:http/http.dart' as http;
 import 'books.dart';
@@ -68,13 +69,7 @@ Future<Book> _getBook() async {
 
   var jsonData = json.decode(bookData.body) as Map<String, dynamic>;
 
-  Book book = Book(
-      title: jsonData["title"],
-      author: jsonData["author"],
-      category: jsonData["category"],
-      description: jsonData["description"],
-      id: jsonData["id"],
-      image: jsonData["image"]);
+  Book book = Book.fromJson(jsonData);
 
   return book;
 }
