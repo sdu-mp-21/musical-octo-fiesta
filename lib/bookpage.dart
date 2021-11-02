@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:BookStore/models/book.dart';
+import 'package:BookStore/services/books.dart';
 import "package:flutter/material.dart";
-import 'package:http/http.dart' as http;
-import 'books.dart';
 
 class MyItemPage extends StatefulWidget {
   final String title;
@@ -23,7 +20,7 @@ Widget _bookWidget({title, author, rating, page}) {
       child: Row(
         children: [
           Container(
-            child: Text(page,
+            child: Text(page.toString(),
                 style:
                     TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center),
@@ -40,7 +37,7 @@ Widget _bookWidget({title, author, rating, page}) {
           ),
           Container(
             child: Text(
-              rating,
+              rating.toString(),
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
@@ -59,19 +56,6 @@ Widget _bookWidget({title, author, rating, page}) {
       ),
     ),
   );
-}
-
-Future<Book> _getBook() async {
-  print("API call");
-  Uri uri =
-      Uri.parse('https://run.mocky.io/v3/15363394-ec04-4921-891c-fd8fe59f67e8');
-  var bookData = await http.get(uri);
-
-  var jsonData = json.decode(bookData.body) as Map<String, dynamic>;
-
-  Book book = Book.fromJson(jsonData);
-
-  return book;
 }
 
 Widget _buildBody(Book book) {
@@ -112,8 +96,8 @@ Widget _buildBody(Book book) {
                       _bookWidget(
                           title: book.title,
                           author: book.author,
-                          rating: "7.8",
-                          page: "340"),
+                          rating: book.rating,
+                          page: book.pageCount),
                     ],
                   ),
                 ),
@@ -172,7 +156,7 @@ class _MyItemPageState extends State<MyItemPage> {
     print(widget.id);
     return SafeArea(
         child: FutureBuilder(
-            future: _getBook(),
+            future: getBookById(widget.id),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder
