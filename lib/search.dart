@@ -1,6 +1,4 @@
-import 'package:BookStore/bookpage.dart';
 import 'package:BookStore/services/books.dart';
-import 'package:BookStore/widgets/booksWidget/bookCard.dart';
 import 'package:BookStore/widgets/searchWidget/searchedBookWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -55,12 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: new AppBar(
-        title:
-            new Text(widget.title, style: new TextStyle(color: Colors.white)),
-      ),
-      body: new Container(
-        padding: new EdgeInsets.all(8.0),
+      body: SafeArea(
+          child: Container(
+        padding: new EdgeInsets.symmetric(horizontal: 10, vertical: 14),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -68,15 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
               cursorColor: Colors.black,
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(14),
                 prefixIcon: Icon(Icons.search),
                 filled: true,
                 hintText: 'Search titles or authors',
-                fillColor: Colors.grey[100],
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black12,
-                    ),
-                    borderRadius: BorderRadius.circular(8)),
+                fillColor: Colors.brown.shade100.withAlpha(64),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
               ),
               onChanged: (string) => (subject.add(string)),
             ),
@@ -116,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     })),
           ],
         ),
-      ),
+      )),
     );
   }
 }
