@@ -23,7 +23,7 @@ class ShowMoreCard extends StatelessWidget {
                   width: 36,
                   height: 36,
                   decoration: BoxDecoration(
-                      color: Colors.blue.shade500,
+                      color: Color(0xFF442B2D),
                       borderRadius: BorderRadius.circular(18)),
                   alignment: Alignment.center,
                   child: HeroIcon(HeroIcons.arrowRight, color: Colors.white),

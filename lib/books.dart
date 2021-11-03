@@ -22,7 +22,7 @@ Widget BookWidget(Book book) {
     height: 100,
     child: Row(
       children: [
-        Image.asset(book.image, fit: BoxFit.fitHeight),
+        Image.network(book.image, fit: BoxFit.fitHeight),
         Text(book.title, overflow: TextOverflow.ellipsis)
       ],
     ),

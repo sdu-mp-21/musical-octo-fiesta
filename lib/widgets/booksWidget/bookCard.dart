@@ -39,7 +39,7 @@ class BookCard extends StatelessWidget {
                           ),
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.teal,
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
@@ -64,7 +64,7 @@ class BookCard extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Colors.blue.shade500,
+                      color: Colors.green.shade600,
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(10)),
