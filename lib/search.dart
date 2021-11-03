@@ -1,20 +1,11 @@
+import 'package:BookStore/bookpage.dart';
+import 'package:BookStore/services/books.dart';
+import 'package:BookStore/widgets/booksWidget/bookCard.dart';
+import 'package:BookStore/widgets/searchWidget/searchedBookWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:rxdart/rxdart.dart';
 
-Map<int, Color> color = {
-  50: Color.fromRGBO(51, 153, 255, .1),
-  100: Color.fromRGBO(51, 153, 255, .2),
-  200: Color.fromRGBO(51, 153, 255, .3),
-  300: Color.fromRGBO(51, 153, 255, .4),
-  400: Color.fromRGBO(51, 153, 255, .5),
-  500: Color.fromRGBO(51, 153, 255, .6),
-  600: Color.fromRGBO(51, 153, 255, .7),
-  700: Color.fromRGBO(51, 153, 255, .8),
-  800: Color.fromRGBO(51, 153, 255, .9),
-  900: Color.fromRGBO(51, 153, 255, 1),
-};
+import 'models/book.dart';
 
 class Search extends StatelessWidget {
   @override
@@ -40,56 +31,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Book> _items = new List();
-
   final subject = new PublishSubject<String>();
-
-  bool _isLoading = false;
+  String query = "";
 
   void _textChanged(String text) {
     if (text.isEmpty) {
-      setState(() {
-        _isLoading = false;
-      });
-      _clearList();
       return;
     }
     setState(() {
-      _isLoading = true;
-    });
-    _clearList();
-    http
-        .get(Uri.parse('https://www.googleapis.com/books/v1/volumes?q=$text'))
-        .then((response) => response.body)
-        .then(jsonDecode)
-        .then((map) => map["items"])
-        .then((list) {
-          list.forEach(_addBook);
-        })
-        .catchError(_onError)
-        .then((e) {
-          setState(() {
-            _isLoading = false;
-          });
-        });
-  }
-
-  void _onError(dynamic d) {
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  void _clearList() {
-    setState(() {
-      _items.clear();
-    });
-  }
-
-  void _addBook(dynamic book) {
-    setState(() {
-      _items.add(new Book(book["volumeInfo"]["title"],
-          book["volumeInfo"]["imageLinks"]["smallThumbnail"]));
+      query = text;
     });
   }
 
@@ -145,42 +95,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     )),
               ],
             ),
-            _isLoading ? new CircularProgressIndicator() : new Container(),
             new Expanded(
-              child: new ListView.builder(
-                padding: new EdgeInsets.all(8.0),
-                itemCount: _items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return new Card(
-                      child: new Padding(
-                          padding: new EdgeInsets.all(8.0),
-                          child: new Row(
-                            children: <Widget>[
-                              _items[index].url != null
-                                  ? new Image.network(_items[index].url)
-                                  : new Container(),
-                              new Flexible(
-                                  child: new Padding(
-                                padding: new EdgeInsets.all(20.0),
-                                child:
-                                    new Text(_items[index].title, maxLines: 9),
-                              )),
-                            ],
-                          )));
-                },
-              ),
+              child: FutureBuilder(
+                  future: getBooksByTitle(query),
+                  builder: (context, projectSnap) {
+                    if (!projectSnap.hasData) {
+                      //print('project snapshot data is: ${projectSnap.data}');
+                      return CircularProgressIndicator();
+                    }
+
+                    return new ListView.builder(
+                        padding: new EdgeInsets.all(8.0),
+                        itemCount: projectSnap.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return SearchedBookWidget(projectSnap.data[index]);
+                        });
+                  }),
             ),
           ],
         ),
       ),
     );
-  }
-}
-
-class Book {
-  String title, url;
-  Book(String title, String url) {
-    this.title = title;
-    this.url = url;
   }
 }
