@@ -56,6 +56,7 @@ class BookCard extends StatelessWidget {
                     Text(
                       book.title,
                       style: TextStyle(fontWeight: FontWeight.w800),
+                      overflow: TextOverflow.ellipsis,
                     )
                   ])),
               Positioned(
