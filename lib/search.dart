@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         title:
             new Text(widget.title, style: new TextStyle(color: Colors.white)),
@@ -69,11 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 filled: true,
-                hintText: 'Search titles, topics, or authors',
+                hintText: 'Search titles or authors',
                 fillColor: Colors.grey[100],
                 border: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: const Color(0xFF000000),
+                      color: Colors.black12,
                     ),
                     borderRadius: BorderRadius.circular(8)),
               ),
@@ -95,23 +96,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     )),
               ],
             ),
-            new Expanded(
-              child: FutureBuilder(
-                  future: getBooksByTitle(query),
-                  builder: (context, projectSnap) {
-                    if (!projectSnap.hasData) {
-                      //print('project snapshot data is: ${projectSnap.data}');
-                      return CircularProgressIndicator();
-                    }
+            Container(
+                child: FutureBuilder(
+                    future: getBooksByTitle(query),
+                    builder: (context, projectSnap) {
+                      if (!projectSnap.hasData) {
+                        //print('project snapshot data is: ${projectSnap.data}');
+                        return CircularProgressIndicator();
+                      }
 
-                    return new ListView.builder(
-                        padding: new EdgeInsets.all(8.0),
-                        itemCount: projectSnap.data.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return SearchedBookWidget(projectSnap.data[index]);
-                        });
-                  }),
-            ),
+                      return Expanded(
+                          child: ListView.builder(
+                              padding: new EdgeInsets.all(8.0),
+                              itemCount: projectSnap.data.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return SearchedBookWidget(
+                                    projectSnap.data[index]);
+                              }));
+                    })),
           ],
         ),
       ),
