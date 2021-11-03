@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         items: [
           BottomNavigationBarItem(
-              label: 'Home',
+              label: "Home",
               icon: HeroIcon(HeroIcons.home),
               activeIcon: HeroIcon(HeroIcons.home, solid: true)),
           BottomNavigationBarItem(
@@ -91,7 +91,7 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
   return base
       .copyWith(
         caption: base.caption.copyWith(
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w500,
           fontSize: 14,
           letterSpacing: defaultLetterSpacing,
         ),
