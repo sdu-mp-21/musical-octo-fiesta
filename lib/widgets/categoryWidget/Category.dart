@@ -1,11 +1,13 @@
 import 'package:BookStore/models/genre.dart';
 import 'package:flutter/cupertino.dart';
-import 'categoryCard.dart';
+import 'CategoryCard.dart';
 
 class Category extends StatelessWidget {
   final List<Genre> genres;
   final int currentGenre;
-  const Category({Key key, this.genres, this.currentGenre}) : super(key: key);
+  final bool isLoading;
+  const Category({Key key, this.genres, this.currentGenre, this.isLoading})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

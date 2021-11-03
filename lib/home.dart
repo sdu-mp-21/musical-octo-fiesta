@@ -1,7 +1,8 @@
 import 'package:BookStore/services/books.dart';
 import 'package:BookStore/services/genres.dart';
 import 'package:BookStore/widgets/booksWidget/booksContainer.dart';
-import 'package:BookStore/widgets/categoryWidget/categories.dart';
+import 'package:BookStore/widgets/categoryWidget/Category.dart';
+import 'package:BookStore/widgets/categoryWidget/CategotyLoading.dart';
 import 'package:BookStore/widgets/welcomeCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,7 @@ class _HomeWidgetState extends State<Home> {
   int currentGenre = 0;
 
   Widget _Body() {
-    return ListView(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
+    return Column(
       children: [
         WelcomeCard(firstName: "Tom"),
         FutureBuilder(
@@ -27,7 +26,7 @@ class _HomeWidgetState extends State<Home> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder
-                return Center(child: Text('Loading...'));
+                return CategoryLoading();
               }
               return Category(currentGenre: 0, genres: snapshot.data);
             }),
@@ -36,7 +35,9 @@ class _HomeWidgetState extends State<Home> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder
-                return Center(child: Text('Loading...'));
+                return Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: CircularProgressIndicator());
               }
               return BooksContainer(books: snapshot.data);
             })

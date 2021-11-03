@@ -1,4 +1,5 @@
 import 'package:BookStore/models/book.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../bookpage.dart';
@@ -24,26 +25,31 @@ class BookCard extends StatelessWidget {
                   width: 120,
                   height: 230,
                   child: Column(children: [
-                    Container(
-                      height: 180,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          image: DecorationImage(
-                            image: NetworkImage(book.image),
-                            fit: BoxFit.cover,
-                          ),
+                    DecoratedBox(
+                        child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                            height: 180,
+                            width: 150,
+                            fit: BoxFit.cover,
+                            imageUrl: book.image,
+                            placeholder: (context, url) => Icon(Icons.image),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.teal,
+                          borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              offset:
-                                  Offset(0, 2), // changes position of shadow
+                              color: Color.fromRGBO(0, 0, 0, 0.05),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: Offset(0, 6), // Shadow position
                             ),
-                          ]),
-                    ),
+                          ],
+                        )),
                     SizedBox(
                       height: 5,
                     ),
