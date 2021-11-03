@@ -61,10 +61,19 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             new TextField(
               cursorColor: Colors.black,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15),
               decoration: InputDecoration(
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                ),
                 contentPadding: EdgeInsets.all(14),
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: Icon(
+                  Icons.search,
+                  size: 28,
+                ),
                 filled: true,
                 hintText: 'Search titles or authors',
                 fillColor: Colors.brown.shade100.withAlpha(64),
