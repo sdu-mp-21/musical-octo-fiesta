@@ -15,7 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<Home> {
-  int currentGenre = 0;
+  String currentGenre = "61810b90bc157300169d63fd";
+  void changeGerne() {}
 
   Widget _Body() {
     return Column(
@@ -28,10 +29,11 @@ class _HomeWidgetState extends State<Home> {
                 // Future hasn't finished yet, return a placeholder
                 return CategoryLoading();
               }
-              return Category(currentGenre: 0, genres: snapshot.data);
+              return Category(
+                  currentGenre: currentGenre, genres: snapshot.data);
             }),
         FutureBuilder(
-            future: getAllBooks(),
+            future: getBooksByGenre(currentGenre),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder

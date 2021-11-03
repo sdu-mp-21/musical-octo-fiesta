@@ -4,7 +4,7 @@ import 'CategoryCard.dart';
 
 class Category extends StatelessWidget {
   final List<Genre> genres;
-  final int currentGenre;
+  final String currentGenre;
   final bool isLoading;
   const Category({Key key, this.genres, this.currentGenre, this.isLoading})
       : super(key: key);
@@ -25,7 +25,7 @@ class Category extends StatelessWidget {
                     child: CategoryCard(
                         index: i,
                         label: genres[i].name,
-                        isSelected: currentGenre == i))
+                        isSelected: currentGenre == genres[i].id))
             ]));
   }
 }

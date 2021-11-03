@@ -40,3 +40,17 @@ Future<List<Book>> getBooksByTitle(String title) async {
 
   return list;
 }
+
+Future<List<Book>> getBooksByGenre(String genreId) async {
+  Uri uri = Uri.parse("$API_URL?genre=$genreId");
+  var response = await http.get(uri);
+  var books = json.decode(response.body);
+
+  List<Book> list = [];
+
+  for (var book in books) {
+    list.add(new Book.fromJson(book));
+  }
+
+  return list;
+}

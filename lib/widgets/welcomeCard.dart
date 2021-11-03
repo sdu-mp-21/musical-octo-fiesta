@@ -13,7 +13,7 @@ class WelcomeCard extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.blue,
             image: DecorationImage(
-              image: AssetImage("assets/images/08.png"),
+              image: AssetImage("assets/images/baner2.jpg"),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(16)),
@@ -26,7 +26,7 @@ class WelcomeCard extends StatelessWidget {
               Text(
                 "Hello, $firstName!",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black87,
                     fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
@@ -34,7 +34,7 @@ class WelcomeCard extends StatelessWidget {
               Text(
                 "Which book suits your current mood?",
                 style: TextStyle(
-                  color: Colors.white70,
+                  color: Colors.black54,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
