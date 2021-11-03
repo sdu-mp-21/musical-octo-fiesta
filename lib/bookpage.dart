@@ -160,7 +160,7 @@ class _MyItemPageState extends State<MyItemPage> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder
-                return Center(child: Text('Loading...'));
+                return Scaffold(body: Center(child: Text('Loading...')));
               }
               return _buildBody(snapshot.data);
             }));
