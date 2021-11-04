@@ -1,7 +1,8 @@
 import 'package:BookStore/services/books.dart';
 import 'package:BookStore/services/genres.dart';
 import 'package:BookStore/widgets/booksWidget/booksContainer.dart';
-import 'package:BookStore/widgets/categoryWidget/categories.dart';
+import 'package:BookStore/widgets/categoryWidget/Category.dart';
+import 'package:BookStore/widgets/categoryWidget/CategotyLoading.dart';
 import 'package:BookStore/widgets/welcomeCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<Home> {
-  int currentGenre = 0;
+  String currentGenre = "61810b90bc157300169d63fd";
+  void changeGerne() {}
+
+  void changeGenre(id) {
+    setState(() {
+      currentGenre = id;
+    });
+  }
 
   Widget _Body() {
     return ListView(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
       children: [
         WelcomeCard(firstName: "Tom"),
         FutureBuilder(
@@ -27,16 +33,29 @@ class _HomeWidgetState extends State<Home> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder
-                return Center(child: Text('Loading...'));
+                return CategoryLoading();
               }
-              return Category(currentGenre: 0, genres: snapshot.data);
+              return Category(
+                  currentGenre: currentGenre,
+                  genres: snapshot.data,
+                  changeGenre: changeGenre);
             }),
         FutureBuilder(
-            future: getAllBooks(),
+            future: getBooksByGenre(currentGenre),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder
-                return Center(child: Text('Loading...'));
+                return Center(
+                  heightFactor: 1,
+                  widthFactor: 1,
+                  child: SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1.5,
+                    ),
+                  ),
+                );
               }
               return BooksContainer(books: snapshot.data);
             })

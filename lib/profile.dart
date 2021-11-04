@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:async/async.dart';
 import 'main.dart';
+import 'profiledesign.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -12,25 +13,36 @@ class Profile extends StatefulWidget {
 }
 
 class _MyProfile extends State<Profile> {
-  String username;
-  String password;
+  String username = '1';
+  String password = '1';
   List data;
 
-  Future<List> readJson() async {
+  Future<String> readJson() async {
     final String response = await rootBundle.loadString('assets/users.json');
     final data2 = await json.decode(response);
+
     setState(() {
       this.data = data2;
-      return data;
-      // print(data);
     });
+    return 'success';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.readJson();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            color: Colors.cyan[500],
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/book1.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
             child: Column(children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: 90),
@@ -56,7 +68,6 @@ class _MyProfile extends State<Profile> {
                 ),
                 onChanged: (username2) {
                   this.username = username2;
-                  // print(username);
                 },
               ),
               SizedBox(
@@ -70,28 +81,68 @@ class _MyProfile extends State<Profile> {
                   ),
                   onChanged: (password2) {
                     this.password = password2;
-                    // print(password);
                   }),
               SizedBox(
                 height: 70,
               ),
               Center(
                 child: RaisedButton(
-                  color: Colors.white, // background
-                  textColor: Colors.blue, // foreground
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(18.0),
+                  ),
+                  textColor: Colors.white,
+                  color: Colors.grey[600],
                   onPressed: () {
-                    // readJson();
                     if (username.length < 3 || password.length < 5) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyHomePage()));
+                      Alert2(context);
                     }
-                    readJson();
+
+                    for (int i = 0; i < data.length; i++) {
+                      if (data[i]['login'] == username &&
+                          data[i]['password'] == password) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ProfileDesign(data, i)));
+                      }
+                    }
                   },
                   child: Text('LOGIN'),
+                ),
+              ),
+              Center(
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(18.0),
+                  ),
+                  textColor: Colors.white,
+                  color: Colors.grey[600],
+                  onPressed: () {
+                    // zhana registration page ashu
+                  },
+                  child: Text('Registration'),
                 ),
               )
             ])));
   }
+
+  _MyProfileDesign(List data, int i) {}
+}
+
+Future Alert2(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Invalid username or password!'),
+        content: const Text('Please, write again.'),
+        actions: [
+          FlatButton(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

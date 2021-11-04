@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
+import 'profile.dart';
 
-class ProfileDesign extends StatefulWidget {
-  const ProfileDesign({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyProfileDesign createState() => new _MyProfileDesign();
-}
+class ProfileDesign extends StatelessWidget {
+  List data2;
+  int i2;
+  String img1;
+  String nameSurname;
+  String login;
+  String age;
+  String address;
+  String number;
+  ProfileDesign(List data, int i) {
+    this.data2 = data;
+    this.i2 = i;
+    this.img1 = data2[i2]['image'];
+    this.nameSurname = data2[i2]['name'] + ' ' + data2[i2]['surname'];
+    this.login = data2[i2]['login'];
+    this.age = data2[i2]['age'] + ' years';
+    this.address = data2[i2]['address'];
+    this.number = data2[i2]['number'];
+    print(img1);
+  }
 
-class _MyProfileDesign extends State<ProfileDesign> {
   @override
   Widget build(BuildContext context) {
+    var i2;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/08.png"),
+            image: AssetImage('assets/images/08.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -43,20 +58,20 @@ class _MyProfileDesign extends State<ProfileDesign> {
               child: Row(
                 children: <Widget>[
                   Column(children: <Widget>[
-                    Text('Tom Holland',
+                    Text(nameSurname,
                         style: TextStyle(
                             fontFamily: 'Montserrat',
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 25.0)),
-                    Text('tomholland@gmail.com',
+                    Text(login,
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w100,
                           fontSize: 18,
                           color: Colors.white,
                         )),
-                    Text('24 years',
+                    Text(age,
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w100,
@@ -68,7 +83,7 @@ class _MyProfileDesign extends State<ProfileDesign> {
                     padding: EdgeInsets.only(left: 15),
                     child: CircleAvatar(
                       radius: 60,
-                      backgroundImage: AssetImage('assets/images/pctr.jpg'),
+                      backgroundImage: AssetImage(img1),
                     ),
                   ),
                 ],
@@ -119,7 +134,7 @@ class _MyProfileDesign extends State<ProfileDesign> {
                                 ),
                               ),
                               Text(
-                                "booklover123",
+                                login,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
@@ -166,7 +181,7 @@ class _MyProfileDesign extends State<ProfileDesign> {
                                 ),
                               ),
                               Text(
-                                "street f, 21 flat",
+                                address,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
@@ -213,7 +228,7 @@ class _MyProfileDesign extends State<ProfileDesign> {
                                 ),
                               ),
                               Text(
-                                "8777777",
+                                number,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontFamily: 'Montserrat',
@@ -235,4 +250,16 @@ class _MyProfileDesign extends State<ProfileDesign> {
       ),
     );
   }
+
+// class MyProfileDesign extends State<ProfileDesign> {
+//   var data2;
+//   var i2;
+
+//   MyProfileDesign(data, i) {
+//     this.data2 = data;
+//     this.i2 = i;
+//   }
+
+//   }
+// }
 }

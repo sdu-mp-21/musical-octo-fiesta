@@ -15,6 +15,9 @@ dependencies:
   http: ^0.13.4
   heroicons: ^0.3.0
   google_fonts: ^2.1.0
+  cached_network_image: ^3.1.0
+  lottie: ^1.1.0
+  animated_text_kit: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +45,8 @@ flutter:
     - assets/images/why.jpg
     - assets/images/today.jpg
     - assets/images/zerotoone.jpg
+    - assets/images/book1.jpg
+    - assets/images/baner2.jpg
     
   
     

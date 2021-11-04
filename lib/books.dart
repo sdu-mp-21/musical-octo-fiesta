@@ -52,6 +52,6 @@ Widget buildBody() {
 class _MyBook extends State<Books> {
   @override
   Widget build(BuildContext context) {
-    return buildBody();
+    return Scaffold(body: buildBody());
   }
 }
