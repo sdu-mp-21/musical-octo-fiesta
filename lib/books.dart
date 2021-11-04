@@ -22,38 +22,12 @@ Widget BookWidget(Book book) {
     height: 100,
     child: Row(
       children: [
-        Image.asset(book.image, fit: BoxFit.fitHeight),
+        Image.network(book.image, fit: BoxFit.fitHeight),
         Text(book.title, overflow: TextOverflow.ellipsis)
       ],
     ),
   );
 }
-
-// Widget chosenBook({title, author, rating, image}) {
-//   Future<List<Book>> _getBooks() async {
-//     Uri uri = Uri.parse(
-//         'https://run.mocky.io/v3/a9268d47-f74b-44a1-bb5c-c4e46c7a26fc');
-//     var bookData = await http.get(uri);
-
-//     var jsonBook = json.decode(bookData.body) as Map<String, dynamic>;
-
-//     List<Book> allBooks = [];
-//     for (var i in jsonBook["books"]) {
-//       Book book = Book(
-//           i["index"], i["bookName"], i["bookAuthor"], i["price"], i["image"]);
-//       allBooks.add(book);
-//     }
-//   }
-
-//   return GestureDetector(
-//     onTap: () {
-//       Navigator.push(
-//         context[0],
-//         MaterialPageRoute(builder: (context) => MyItemPage()),
-//       );
-//     },
-//   );
-// }
 
 Widget buildBody() {
   return Scaffold(
@@ -81,27 +55,3 @@ class _MyBook extends State<Books> {
     return buildBody();
   }
 }
-
-// @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: new AppBar(),
-//       body: Container(
-//         child: FutureBuilder(
-//             future: _getBooks(),
-//             builder: (BuildContext context, AsyncSnapshot snapshot) {
-//               if (!snapshot.hasData) {
-//                 return Container(
-//                   child: Center(
-//                     child: Text("Loading..."),
-//                   ),
-//                 );
-//               }
-//               return BooksWidget(snapshot.data);
-//             }),
-//       ),
-//     );
-//   }
-// }
-
-
