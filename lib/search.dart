@@ -3,8 +3,6 @@ import 'package:BookStore/widgets/searchWidget/searchedBookWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'models/book.dart';
-
 class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

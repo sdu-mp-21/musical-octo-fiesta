@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'profile.dart';
 
 class ProfileDesign extends StatelessWidget {
   List data2;
@@ -24,7 +23,6 @@ class ProfileDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var i2;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

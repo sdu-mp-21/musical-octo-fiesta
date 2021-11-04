@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
-import 'bookpage.dart';
-import 'profiledesign.dart';
 import 'search.dart';
 import 'home.dart';
 import 'basket.dart';

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
-import 'package:async/async.dart';
-import 'main.dart';
 import 'profiledesign.dart';
+import 'registration.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -63,8 +62,10 @@ class _MyProfile extends State<Profile> {
               TextField(
                 decoration: InputDecoration(
                   labelText: "Username",
+                  labelStyle: TextStyle(color: Colors.white),
                   hintText: "Enter your email",
-                  prefixIcon: Icon(Icons.people),
+                  hintStyle: TextStyle(color: Colors.white),
+                  prefixIcon: Icon(Icons.people, color: Colors.white),
                 ),
                 onChanged: (username2) {
                   this.username = username2;
@@ -75,9 +76,11 @@ class _MyProfile extends State<Profile> {
               ),
               TextField(
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: Icon(Icons.lock, color: Colors.white),
                     labelText: "Password",
+                    labelStyle: TextStyle(color: Colors.white),
                     hintText: "Enter you password",
+                    hintStyle: TextStyle(color: Colors.white),
                   ),
                   onChanged: (password2) {
                     this.password = password2;
@@ -102,6 +105,8 @@ class _MyProfile extends State<Profile> {
                           data[i]['password'] == password) {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ProfileDesign(data, i)));
+                      } else {
+                        Alert2(context);
                       }
                     }
                   },
@@ -116,6 +121,8 @@ class _MyProfile extends State<Profile> {
                   textColor: Colors.white,
                   color: Colors.grey[600],
                   onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Registration(data)));
                     // zhana registration page ashu
                   },
                   child: Text('Registration'),
@@ -123,8 +130,6 @@ class _MyProfile extends State<Profile> {
               )
             ])));
   }
-
-  _MyProfileDesign(List data, int i) {}
 }
 
 Future Alert2(BuildContext context) {

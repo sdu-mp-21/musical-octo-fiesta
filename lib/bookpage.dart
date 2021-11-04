@@ -13,53 +13,6 @@ class MyItemPage extends StatefulWidget {
   _MyItemPageState createState() => new _MyItemPageState();
 }
 
-Widget _bookWidget({title, author, rating, page}) {
-  return Padding(
-    padding: EdgeInsets.all(10),
-    child: SizedBox(
-      width: 100,
-      height: 50,
-      child: Row(
-        children: [
-          Container(
-            child: Text(page.toString(),
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
-                textAlign: TextAlign.center),
-            width: 50,
-            height: 30,
-            decoration: BoxDecoration(
-              color: Colors.blue[50],
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(5),
-                  bottomLeft: Radius.circular(5),
-                  topLeft: Radius.circular(5)),
-            ),
-          ),
-          Container(
-            child: Text(
-              rating.toString(),
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            ),
-            width: 50,
-            height: 30,
-            decoration: BoxDecoration(
-              color: Colors.blue[50],
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(5),
-                  bottomLeft: Radius.circular(5),
-                  topLeft: Radius.circular(5)),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
 Widget _buildBody(Book book) {
   return Scaffold(
     body: Padding(
