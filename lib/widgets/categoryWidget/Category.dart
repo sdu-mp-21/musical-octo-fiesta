@@ -6,7 +6,13 @@ class Category extends StatelessWidget {
   final List<Genre> genres;
   final String currentGenre;
   final bool isLoading;
-  const Category({Key key, this.genres, this.currentGenre, this.isLoading})
+  final OnChangeGenre changeGenre;
+  const Category(
+      {Key key,
+      this.genres,
+      this.currentGenre,
+      this.isLoading,
+      this.changeGenre})
       : super(key: key);
 
   @override
@@ -21,7 +27,7 @@ class Category extends StatelessWidget {
             children: [
               for (var i = 0; i < genres.length; i++)
                 GestureDetector(
-                    onTap: () => {},
+                    onTap: () => {changeGenre(genres[i].id)},
                     child: CategoryCard(
                         index: i,
                         label: genres[i].name,
@@ -29,3 +35,5 @@ class Category extends StatelessWidget {
             ]));
   }
 }
+
+typedef OnChangeGenre = void Function(String id);

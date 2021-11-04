@@ -18,8 +18,14 @@ class _HomeWidgetState extends State<Home> {
   String currentGenre = "61810b90bc157300169d63fd";
   void changeGerne() {}
 
+  void changeGenre(id) {
+    setState(() {
+      currentGenre = id;
+    });
+  }
+
   Widget _Body() {
-    return Column(
+    return ListView(
       children: [
         WelcomeCard(firstName: "Tom"),
         FutureBuilder(
@@ -30,7 +36,9 @@ class _HomeWidgetState extends State<Home> {
                 return CategoryLoading();
               }
               return Category(
-                  currentGenre: currentGenre, genres: snapshot.data);
+                  currentGenre: currentGenre,
+                  genres: snapshot.data,
+                  changeGenre: changeGenre);
             }),
         FutureBuilder(
             future: getBooksByGenre(currentGenre),
