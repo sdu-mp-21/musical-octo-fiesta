@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,8 @@ class WelcomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        width: double.infinity,
+        height: 200,
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Colors.blue,
@@ -20,8 +23,8 @@ class WelcomeCard extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(50),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Hello, $firstName!",
@@ -31,15 +34,23 @@ class WelcomeCard extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
-              Text(
-                "Which book suits your current mood?",
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              )
+              DefaultTextStyle(
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      FadeAnimatedText('Which book suits your current mood?',
+                          textAlign: TextAlign.center),
+                      FadeAnimatedText('Action'),
+                      FadeAnimatedText('Fantasy'),
+                      FadeAnimatedText('Classics'),
+                    ],
+                    repeatForever: true,
+                  )),
             ],
           ),
         ));
