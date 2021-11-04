@@ -45,9 +45,17 @@ class _HomeWidgetState extends State<Home> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 // Future hasn't finished yet, return a placeholder
-                return Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: CircularProgressIndicator());
+                return Center(
+                  heightFactor: 1,
+                  widthFactor: 1,
+                  child: SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1.5,
+                    ),
+                  ),
+                );
               }
               return BooksContainer(books: snapshot.data);
             })
