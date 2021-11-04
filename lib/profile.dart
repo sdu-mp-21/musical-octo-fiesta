@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:async/async.dart';
 import 'main.dart';
+import 'profiledesign.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -16,13 +17,20 @@ class _MyProfile extends State<Profile> {
   String password = '1';
   List data;
 
-  Future<List> readJson() async {
+  Future<String> readJson() async {
     final String response = await rootBundle.loadString('assets/users.json');
     final data2 = await json.decode(response);
+
     setState(() {
       this.data = data2;
-      // print(data);
     });
+    return 'success';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.readJson();
   }
 
   @override
@@ -88,9 +96,14 @@ class _MyProfile extends State<Profile> {
                     if (username.length < 3 || password.length < 5) {
                       Alert2(context);
                     }
-                    // if (data.contains(username) && data.contains(password)) {
-                    //   // zhana str ashu kerek i onda profile page zhasau
-                    // }
+
+                    for (int i = 0; i < data.length; i++) {
+                      if (data[i]['login'] == username &&
+                          data[i]['password'] == password) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ProfileDesign(data, i)));
+                      }
+                    }
                   },
                   child: Text('LOGIN'),
                 ),
@@ -110,6 +123,8 @@ class _MyProfile extends State<Profile> {
               )
             ])));
   }
+
+  _MyProfileDesign(List data, int i) {}
 }
 
 Future Alert2(BuildContext context) {

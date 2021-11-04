@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final arr = [
     Home(),
     Search(),
-    ProfileDesign(),
+    Basket(),
     Profile(),
   ];
 

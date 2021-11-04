@@ -6,7 +6,9 @@
         "login": "johny",
         "password": "12345",
         "image": "assets/images/johnny.jpg",
-        "age" : 26
+        "age" : "26",
+        "address": "Asyl Arman 1",
+        "number": "333-333-333"
     },
 
     {
@@ -16,7 +18,9 @@
         "login": "nursultan",
         "password": "123456",
         "image": "assets/images/nursultan.jfif",
-        "age" : 70
+        "age" : "70",
+        "address": "Altyn Auyl",
+        "number": "777 777 77 77"
     },
 
     {
@@ -26,7 +30,9 @@
         "login": "piter",
         "password": "1234567",
         "image": "assets/images/piter.jpeg",
-        "age" : 40
+        "age" : "40",
+        "address": "Taraz 08",
+        "number": "666 666 66 66"
     },
 
     {
@@ -36,7 +42,9 @@
         "login": "tauekel",
         "password": "12345678",
         "image": "assets/images/tauekel.jfif",
-        "age" : 30
+        "age" : "30",
+        "address": "Almaty 323",
+        "number": "8764 6594 34-45"
     },
 
     {
@@ -46,6 +54,8 @@
         "login": "tom",
         "password": "123456789",
         "image": "assets/images/tom.jpg",
-        "age" : 35
+        "age" : "35",
+        "address": "Astana 12",
+        "number": "967 - 534 - 534"
     }
 ]
