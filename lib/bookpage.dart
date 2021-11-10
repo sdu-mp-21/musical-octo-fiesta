@@ -60,20 +60,62 @@ Widget _bookWidget({title, author, rating, page}) {
   );
 }
 
-Widget _buildBody(Book book) {
-  return Scaffold(
-    body: Padding(
-      padding: EdgeInsets.all(0),
-      child: Column(
-        children: [
-          Container(
-            child: CustomScrollView(
+Widget buildContent(Book book) {
+  return Column(
+    children: [
+      Container(
+        child: Column(children: [
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: Text(
+              book.title,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'RobotoMono',
+                  color: Colors.black,
+                  fontSize: 20),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(30),
+            child: Column(children: [
+              Text(
+                book.description,
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ]),
+          ),
+        ]),
+      ),
+    ],
+  );
+}
+
+class _MyItemPageState extends State<MyItemPage> {
+  var top = 0.0;
+  ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  Widget _buildBody(Book book) {
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(0),
+        child: Stack(
+          children: [
+            CustomScrollView(
+              controller: _scrollController,
               slivers: <Widget>[
                 SliverAppBar(
-                  backgroundColor: Colors.lightBlue.shade400,
-                  expandedHeight: 300,
+                  expandedHeight: 400,
                   flexibleSpace: Container(
-                    height: 300,
+                    height: 400,
                     child: Stack(
                       children: <Widget>[
                         ClipRRect(
@@ -85,119 +127,62 @@ Widget _buildBody(Book book) {
                         ),
                         Align(
                           child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: Image.network(book.image,
-                                width: 180, height: 200),
+                                width: 250, height: 300),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
+                SliverFillRemaining(
+                  child: buildContent(book),
+                ),
               ],
             ),
-          ),
-        ],
+            _addFav(),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-// Widget _buildBody(Book book) {
-//   return Scaffold(
-//     appBar: new AppBar(
-//         title: Center(child: Text(book.title)),
-//         leading: IconButton(
-//           icon: const Icon(Icons.arrow_back),
-//           onPressed: () {},
-//         ),
-//         backgroundColor: Colors.blue.shade500,
-//         actions: <Widget>[
-//           // ignore: deprecated_member_use
-//           IconButton(
-//             icon: const Icon(Icons.more_horiz),
-//             onPressed: () {},
-//           )
-//         ]),
-//     body: Padding(
-//       padding: EdgeInsets.all(10),
-//       child: SingleChildScrollView(
-//         child: Column(
-//           children: [
-//             ListView(
-//               scrollDirection: Axis.vertical,
-//               shrinkWrap: true,
-//               physics: ClampingScrollPhysics(),
-//               children: <Widget>[
-//                 Container(
-//                     child: Image.network(
-//                   book.image,
-//                   width: 180,
-//                   height: 200,
-//                 )),
-//                 Center(
-//                   child: Row(
-//                     children: [
-//                       _bookWidget(
-//                           title: book.title,
-//                           author: book.author,
-//                           rating: book.rating,
-//                           page: book.pageCount),
-//                     ],
-//                   ),
-//                 ),
-//                 Container(
-//                   padding: EdgeInsets.all(5),
-//                   margin: EdgeInsets.all(5),
-//                   child: Text('Description',
-//                       style: TextStyle(
-//                           fontWeight: FontWeight.w800,
-//                           fontSize: 16,
-//                           fontStyle: FontStyle.italic)),
-//                 ),
-//                 Container(
-//                   padding: EdgeInsets.all(5),
-//                   margin: EdgeInsets.all(5),
-//                   child: Text(
-//                     book.description,
-//                     textAlign: TextAlign.justify,
-//                     style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
-//                   ),
-//                 ),
-//                 Container(
-//                   child: Center(
-//                     child: Row(
-//                       children: [
-//                         IconButton(
-//                           icon: const Icon(Icons.favorite,
-//                               color: Colors.redAccent),
-//                           onPressed: () {},
-//                           iconSize: 35,
-//                         ),
-//                         RaisedButton(
-//                           onPressed: () {},
-//                           child: Text(
-//                             "Add to card",
-//                             style: TextStyle(color: Colors.blueAccent),
-//                           ),
-//                           color: Colors.blue[100],
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     ),
-//   );
-// }
+  Widget _addFav() {
+    final double defMargin = 360;
+    final double defStart = 250;
+    final double defEnd = defStart / 2;
 
-class _MyItemPageState extends State<MyItemPage> {
+    double top = defMargin;
+    double scale = 1.0;
+
+    if (_scrollController.hasClients) {
+      double offset = _scrollController.offset;
+      top -= offset;
+      if (offset < defStart - defEnd) {
+        scale = 1.0;
+      } else if (offset < defStart - defEnd) {
+        scale = (defMargin - defEnd - offset);
+      } else {
+        scale = 0.0;
+      }
+    }
+
+    return Positioned(
+      top: top,
+      right: 16,
+      child: FloatingActionButton(
+        backgroundColor: Colors.orange.shade100,
+        child: Icon(Icons.shopping_cart),
+        onPressed: () {},
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(widget.id);
     return SafeArea(
         child: FutureBuilder(
             future: getBookById(widget.id),
