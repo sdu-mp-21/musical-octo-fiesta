@@ -58,9 +58,12 @@ class SearchedBookWidget extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
-                            Text(book.description),
-                            SizedBox(height: 20),
-                            Text(book.price.toString())
+                            Text(
+                              book.description,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            SizedBox(height: 30),
+                            Text(book.price.toString() + " ₸")
                           ],
                         ))),
                 Expanded(
