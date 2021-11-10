@@ -35,13 +35,15 @@ class _MyProfile extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/book1.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/book1.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
             child: Column(children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: 90),
@@ -105,8 +107,6 @@ class _MyProfile extends State<Profile> {
                           data[i]['password'] == password) {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ProfileDesign(data, i)));
-                      } else {
-                        Alert2(context);
                       }
                     }
                   },
@@ -128,7 +128,11 @@ class _MyProfile extends State<Profile> {
                   child: Text('Registration'),
                 ),
               )
-            ])));
+            ]),
+          ),
+        ),
+      ),
+    );
   }
 }
 
