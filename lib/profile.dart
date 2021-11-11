@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
-import 'package:async/async.dart';
-import 'main.dart';
 import 'profiledesign.dart';
+import 'registration.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -36,13 +35,15 @@ class _MyProfile extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/book1.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/book1.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
             child: Column(children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: 90),
@@ -63,8 +64,10 @@ class _MyProfile extends State<Profile> {
               TextField(
                 decoration: InputDecoration(
                   labelText: "Username",
+                  labelStyle: TextStyle(color: Colors.white),
                   hintText: "Enter your email",
-                  prefixIcon: Icon(Icons.people),
+                  hintStyle: TextStyle(color: Colors.white),
+                  prefixIcon: Icon(Icons.people, color: Colors.white),
                 ),
                 onChanged: (username2) {
                   this.username = username2;
@@ -75,9 +78,11 @@ class _MyProfile extends State<Profile> {
               ),
               TextField(
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: Icon(Icons.lock, color: Colors.white),
                     labelText: "Password",
+                    labelStyle: TextStyle(color: Colors.white),
                     hintText: "Enter you password",
+                    hintStyle: TextStyle(color: Colors.white),
                   ),
                   onChanged: (password2) {
                     this.password = password2;
@@ -116,15 +121,19 @@ class _MyProfile extends State<Profile> {
                   textColor: Colors.white,
                   color: Colors.grey[600],
                   onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Registration(data)));
                     // zhana registration page ashu
                   },
                   child: Text('Registration'),
                 ),
               )
-            ])));
+            ]),
+          ),
+        ),
+      ),
+    );
   }
-
-  _MyProfileDesign(List data, int i) {}
 }
 
 Future Alert2(BuildContext context) {

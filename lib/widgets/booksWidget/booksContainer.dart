@@ -11,18 +11,19 @@ class BooksContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int itemsToShow = books.length < 7 ? books.length : 7;
     return Container(
         height: 246,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
-          children: books.length > 0
-              ? [
-                  for (var i = 0; i < books.length; i++) BookCard(books[i]),
-                  ShowMoreCard()
-                ]
-              : [NoBooksCard()],
-        ));
+        child: books.length > 0
+            ? ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                children: [
+                  for (var i = 0; i < itemsToShow; i++) BookCard(books[i]),
+                  if (itemsToShow > 6) ShowMoreCard()
+                ],
+              )
+            : NoBooksCard());
   }
 }

@@ -57,7 +57,14 @@ class BookCard extends StatelessWidget {
                       book.title,
                       style: TextStyle(fontWeight: FontWeight.w800),
                       overflow: TextOverflow.ellipsis,
-                    )
+                    ),
+                    Text(
+                      book.price.toString() + " ₸",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Colors.black38),
+                    ),
                   ])),
               Positioned(
                   top: 10,

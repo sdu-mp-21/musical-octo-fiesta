@@ -1,4 +1,3 @@
-import 'package:BookStore/models/genre.dart';
 import 'package:flutter/cupertino.dart';
 import 'CategoryCard.dart';
 
