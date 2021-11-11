@@ -49,6 +49,10 @@ flutter:
     - assets/images/book1.jpg
     - assets/images/baner2.jpg
     - assets/images/registration.jpg
+    - assets/basket.json
+    - assets/images/steve.jpg
+    - assets/images/java.jpg
+    
     
   
     

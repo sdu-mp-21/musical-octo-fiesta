@@ -1,0 +1,36 @@
+[
+    {
+        "id" : 1,
+        "imgPath": "assets/images/atomichabits.jpg",
+        "name" : "Atomic Habits",
+        "price" : "3000KZT"
+    },
+
+    {
+        "id" : 2,
+        "imgPath": "assets/images/java.jpg",
+        "name" : "Intoduction to Java",
+        "price" : "FREE"
+    },
+
+    {
+        "id" : 3,
+        "imgPath": "assets/images/zerotoone.jpg",
+        "name" : "Zero to One",
+        "price" : "3110KZT"
+     },
+
+    {
+        "id" : 4,
+        "imgPath": "assets/images/steve.jpg",
+        "name" : "Steve Jobs",
+        "price" : "6990KZT"
+    },
+
+    {
+        "id" : 5,
+        "imgPath": "assets/images/today.jpg",
+        "name" : "Today",
+        "price" : "4000KZT"
+    }
+]
