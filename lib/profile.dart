@@ -12,8 +12,8 @@ class Profile extends StatefulWidget {
 }
 
 class _MyProfile extends State<Profile> {
-  String username = '1';
-  String password = '1';
+  String username = '';
+  String password = '';
   List data;
 
   Future<String> readJson() async {
@@ -36,12 +36,6 @@ class _MyProfile extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/book1.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Center(
           child: SingleChildScrollView(
             child: Column(children: <Widget>[
@@ -51,7 +45,7 @@ class _MyProfile extends State<Profile> {
                   child: Text('Log In',
                       style: GoogleFonts.pacifico(
                         textStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.brown[900],
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                         ),
@@ -61,32 +55,40 @@ class _MyProfile extends State<Profile> {
               SizedBox(
                 height: 50,
               ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Username",
-                  labelStyle: TextStyle(color: Colors.white),
-                  hintText: "Enter your email",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(Icons.people, color: Colors.white),
+              Container(
+                width: 350.0,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Username",
+                    labelStyle: TextStyle(color: Colors.brown[900]),
+                    hintText: "Enter your email",
+                    hintStyle: TextStyle(color: Colors.brown[900]),
+                    prefixIcon: Icon(Icons.people, color: Colors.brown[900]),
+                  ),
+                  onChanged: (username2) {
+                    this.username = username2;
+                  },
                 ),
-                onChanged: (username2) {
-                  this.username = username2;
-                },
               ),
               SizedBox(
                 height: 60,
               ),
-              TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock, color: Colors.white),
-                    labelText: "Password",
-                    labelStyle: TextStyle(color: Colors.white),
-                    hintText: "Enter you password",
-                    hintStyle: TextStyle(color: Colors.white),
-                  ),
-                  onChanged: (password2) {
-                    this.password = password2;
-                  }),
+              Container(
+                width: 350.0,
+                child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Password",
+                      hintText: "Enter you password",
+                      labelStyle: TextStyle(color: Colors.brown[900]),
+                      prefixIcon: Icon(Icons.lock, color: Colors.brown[900]),
+                      hintStyle: TextStyle(color: Colors.brown[900]),
+                    ),
+                    onChanged: (password2) {
+                      this.password = password2;
+                    }),
+              ),
               SizedBox(
                 height: 70,
               ),
@@ -96,7 +98,7 @@ class _MyProfile extends State<Profile> {
                     borderRadius: new BorderRadius.circular(18.0),
                   ),
                   textColor: Colors.white,
-                  color: Colors.grey[600],
+                  color: Colors.brown[900],
                   onPressed: () {
                     if (username.length < 3 || password.length < 5) {
                       Alert2(context);
@@ -119,10 +121,10 @@ class _MyProfile extends State<Profile> {
                     borderRadius: new BorderRadius.circular(18.0),
                   ),
                   textColor: Colors.white,
-                  color: Colors.grey[600],
+                  color: Colors.brown[900],
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Registration(data)));
+                        builder: (context) => Registration()));
                     // zhana registration page ashu
                   },
                   child: Text('Registration'),
