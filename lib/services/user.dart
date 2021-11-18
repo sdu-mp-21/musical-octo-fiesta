@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:BookStore/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -7,22 +9,25 @@ const String API_URL = "https://musical-octo-fiesta.herokuapp.com/api/users";
 Future<void> createUser(
     String firstName, String lastName, String email, String password) async {
   Uri uri = Uri.parse(API_URL);
-  var body = json.encode({
+
+  Map data = {
     "firstName": firstName,
     "lastName": lastName,
     "email": email,
     "password": password
-  });
+  };
+  var body = json.encode(data);
+  final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
 
-  http.Response response = await http.post(uri, body: body);
+  http.Response response = await http.post(uri, body: body, headers: headers);
 
-  // User user = User.fromJson(body);
-
-  // return user;
-  int statusCode = response.statusCode;
-  print('This is the statuscode: $statusCode');
-  final responseJson = json.decode(response.body);
-  print(responseJson);
+  if (response.statusCode == 200) {
+    print("User created");
+  } else {
+    print(response.statusCode);
+    print(response.body);
+    throw Exception('Failed to create album.');
+  }
 }
 
 Future<User> getUser() async {

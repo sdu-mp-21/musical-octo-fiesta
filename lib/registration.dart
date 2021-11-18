@@ -3,6 +3,7 @@ import 'package:BookStore/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
+import 'profile.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key key}) : super(key: key);
@@ -12,7 +13,6 @@ class Registration extends StatefulWidget {
 
 class _Registration extends State<Registration> {
   String firstName, lastName, email, password;
-  User _user;
 
   @override
   Widget build(BuildContext context) {
@@ -116,10 +116,6 @@ class _Registration extends State<Registration> {
               SizedBox(
                 height: 35,
               ),
-              _user == null
-                  ? Container()
-                  : Text(
-                      "The user ${_user.firstName}, ${_user.lastName} is created successfully"),
               Center(
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
@@ -129,11 +125,8 @@ class _Registration extends State<Registration> {
                   color: Colors.brown[900],
                   onPressed: () async {
                     await createUser(firstName, lastName, email, password);
-
-                    // setState(() {
-                    //   _user = user2;
-                    // });
-                    //  zhana user kosu i login pageke zhberu
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Profile()));
                   },
                   child: Text('Submit'),
                 ),
