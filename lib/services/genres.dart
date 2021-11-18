@@ -5,25 +5,33 @@ import 'dart:convert';
 const String API_URL = "https://musical-octo-fiesta.herokuapp.com/api/genres";
 
 Future<List<Genre>> getGenres() async {
-  Uri uri = Uri.parse(API_URL);
-  var response = await http.get(uri);
-  var genres = json.decode(response.body);
+  try {
+    Uri uri = Uri.parse(API_URL);
+    var response = await http.get(uri);
+    var genres = json.decode(response.body);
 
-  List<Genre> list = [];
+    List<Genre> list = [];
 
-  for (var genre in genres) {
-    list.add(new Genre.fromJson(genre));
+    for (var genre in genres) {
+      list.add(new Genre.fromJson(genre));
+    }
+
+    return list;
+  } catch (err) {
+    return Future.error("Error occured");
   }
-
-  return list;
 }
 
 Future<Genre> getGenre(String id) async {
-  Uri uri = Uri.parse("API_URL/$id");
-  var response = await http.get(uri);
-  var body = json.decode(response.body);
+  try {
+    Uri uri = Uri.parse("API_URL/$id");
+    var response = await http.get(uri);
+    var body = json.decode(response.body);
 
-  Genre genre = new Genre.fromJson(body);
+    Genre genre = new Genre.fromJson(body);
 
-  return genre;
+    return genre;
+  } catch (err) {
+    return Future.error("Error occured");
+  }
 }

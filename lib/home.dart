@@ -1,8 +1,7 @@
+import 'package:BookStore/models/genre.dart';
 import 'package:BookStore/services/books.dart';
 import 'package:BookStore/services/genres.dart';
 import 'package:BookStore/widgets/booksWidget/booksContainer.dart';
-import 'package:BookStore/widgets/categoryWidget/Category.dart';
-import 'package:BookStore/widgets/categoryWidget/CategotyLoading.dart';
 import 'package:BookStore/widgets/welcomeCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class Home extends StatefulWidget {
 
 class _HomeWidgetState extends State<Home> {
   String currentGenre = "61810b90bc157300169d63fd";
-  void changeGerne() {}
 
   void changeGenre(id) {
     setState(() {
@@ -24,47 +22,76 @@ class _HomeWidgetState extends State<Home> {
     });
   }
 
-  Widget _Body() {
+  Widget section(String genreId) {
+    return FutureBuilder(
+        future: getBooksByGenre(genreId),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1.5,
+                  ),
+                ),
+              );
+            default:
+              if (snapshot.hasError)
+                return Text('');
+              else
+                return BooksContainer(books: snapshot.data);
+          }
+        });
+  }
+
+  Widget sections(List<Genre> genres) {
+    List<Widget> list = [];
+    for (Genre genre in genres) {
+      list.add(Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Text(
+            genre.name,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+          )));
+      list.add(section(genre.id));
+    }
+    return Column(
+      children: list,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+    );
+  }
+
+  Widget body() {
     return ListView(
       children: [
         WelcomeCard(firstName: "Tom"),
         FutureBuilder(
             future: getGenres(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                // Future hasn't finished yet, return a placeholder
-                return CategoryLoading();
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return Text("");
+                default:
+                  if (snapshot.hasError) {
+                    return Text('');
+                  } else {
+                    return sections(snapshot.data);
+                  }
               }
-              return Category(
-                  currentGenre: currentGenre,
-                  genres: snapshot.data,
-                  changeGenre: changeGenre);
             }),
-        FutureBuilder(
-            future: getBooksByGenre(currentGenre),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                // Future hasn't finished yet, return a placeholder
-                return Center(
-                  heightFactor: 1,
-                  widthFactor: 1,
-                  child: SizedBox(
-                    height: 24,
-                    width: 24,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 1.5,
-                    ),
-                  ),
-                );
-              }
-              return BooksContainer(books: snapshot.data);
-            })
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: _Body());
+    return SafeArea(
+        child: Padding(
+      child: body(),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+    ));
   }
 }
