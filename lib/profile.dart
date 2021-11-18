@@ -77,6 +77,7 @@ class _MyProfile extends State<Profile> {
               Container(
                 width: 350.0,
                 child: TextField(
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Password",

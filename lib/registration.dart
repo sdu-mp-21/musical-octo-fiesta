@@ -1,8 +1,18 @@
+import 'package:BookStore/models/user.dart';
+import 'package:BookStore/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/cupertino.dart';
 
-class Registration extends StatelessWidget {
-  String name, surname, login, password;
+class Registration extends StatefulWidget {
+  const Registration({Key key}) : super(key: key);
+  @override
+  _Registration createState() => new _Registration();
+}
+
+class _Registration extends State<Registration> {
+  String firstName, lastName, email, password;
+  User _user;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +49,7 @@ class Registration extends StatelessWidget {
                     hintStyle: TextStyle(color: Colors.brown[900]),
                   ),
                   onChanged: (name2) {
-                    this.name = name2;
+                    this.firstName = name2;
                   },
                 ),
               ),
@@ -58,7 +68,7 @@ class Registration extends StatelessWidget {
                     hintStyle: TextStyle(color: Colors.brown[900]),
                   ),
                   onChanged: (surname2) {
-                    this.surname = surname2;
+                    this.lastName = surname2;
                   },
                 ),
               ),
@@ -71,14 +81,14 @@ class Registration extends StatelessWidget {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Email: ",
-                    hintText: "Enter your login",
+                    hintText: "Enter your email",
                     prefixIcon:
                         Icon(Icons.login_rounded, color: Colors.brown[900]),
                     labelStyle: TextStyle(color: Colors.brown[900]),
                     hintStyle: TextStyle(color: Colors.brown[900]),
                   ),
                   onChanged: (login2) {
-                    this.login = login2;
+                    this.email = login2;
                   },
                 ),
               ),
@@ -88,6 +98,7 @@ class Registration extends StatelessWidget {
               Container(
                 width: 350.0,
                 child: TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Password: ",
@@ -105,6 +116,10 @@ class Registration extends StatelessWidget {
               SizedBox(
                 height: 35,
               ),
+              _user == null
+                  ? Container()
+                  : Text(
+                      "The user ${_user.firstName}, ${_user.lastName} is created successfully"),
               Center(
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
@@ -112,7 +127,12 @@ class Registration extends StatelessWidget {
                   ),
                   textColor: Colors.white,
                   color: Colors.brown[900],
-                  onPressed: () {
+                  onPressed: () async {
+                    await createUser(firstName, lastName, email, password);
+
+                    // setState(() {
+                    //   _user = user2;
+                    // });
                     //  zhana user kosu i login pageke zhberu
                   },
                   child: Text('Submit'),

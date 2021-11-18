@@ -4,16 +4,25 @@ import 'dart:convert';
 
 const String API_URL = "https://musical-octo-fiesta.herokuapp.com/api/users";
 
-Future<User> createUser(
+Future<void> createUser(
     String firstName, String lastName, String email, String password) async {
   Uri uri = Uri.parse(API_URL);
-  var response =
-      await http.post(uri, body: {firstName, lastName, email, password});
-  var body = json.decode(response.body);
+  var body = json.encode({
+    "firstName": firstName,
+    "lastName": lastName,
+    "email": email,
+    "password": password
+  });
 
-  User user = User.fromJson(body);
+  http.Response response = await http.post(uri, body: body);
 
-  return user;
+  // User user = User.fromJson(body);
+
+  // return user;
+  int statusCode = response.statusCode;
+  print('This is the statuscode: $statusCode');
+  final responseJson = json.decode(response.body);
+  print(responseJson);
 }
 
 Future<User> getUser() async {

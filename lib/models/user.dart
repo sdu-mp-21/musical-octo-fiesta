@@ -1,14 +1,14 @@
 class User {
-  final String id;
   final String firstName;
   final String lastName;
   final String email;
+  final String password;
 
-  User({this.id, this.firstName, this.lastName, this.email});
+  User({this.firstName, this.lastName, this.email, this.password});
 
   User.fromJson(Map<String, dynamic> json)
-      : id = json["_id"],
-        firstName = json["firstName"],
+      : firstName = json["firstName"],
         lastName = json["lastName"],
-        email = json["email"];
+        email = json["email"],
+        password = json["password"];
 }
