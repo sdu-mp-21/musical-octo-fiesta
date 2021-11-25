@@ -1,3 +1,16 @@
+class BooksData {
+  List<Book> booksData;
+  BooksData(this.booksData);
+
+  void addProduct(Book b) {
+    booksData.add(b);
+  }
+
+  void removeProduct(Book b) {
+    booksData.add(b);
+  }
+}
+
 class Book {
   final String id;
   final String title;
@@ -10,6 +23,7 @@ class Book {
   final int pageCount;
   final String publisher;
   final String language;
+  int quantity;
 
   Book(
       {this.id,
@@ -22,7 +36,8 @@ class Book {
       this.price,
       this.image,
       this.description,
-      this.genre});
+      this.genre,
+      this.quantity});
 
   Book.fromJson(Map<String, dynamic> json)
       : id = json["_id"],

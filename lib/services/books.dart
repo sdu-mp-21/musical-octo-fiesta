@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import "package:BookStore/models/book.dart";
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -72,3 +70,44 @@ Future<List<Book>> getBooksByGenre(String genreId) async {
     return Future.error("Error occured");
   }
 }
+
+//class ShopDataProvider {
+Future<BooksData> getShopItems() async {
+  try {
+    Uri uri = Uri.parse(API_URL);
+    var response = await http.get(uri);
+    var books = json.decode(response.body);
+
+    List<Book> booksData = [];
+
+    for (var book in books) {
+      booksData.add(new Book.fromJson(book));
+    }
+    for (var book in books) {
+      print(book.id);
+    }
+
+    return BooksData(booksData);
+  } catch (err) {
+    return Future.error("Error occured");
+  }
+}
+
+Future<BooksData> getCartItems() async {
+  try {
+    Uri uri = Uri.parse(API_URL);
+    var response = await http.get(uri);
+    var books = json.decode(response.body);
+
+    List<Book> booksData = [];
+
+    for (var book in books) {
+      booksData.add(new Book.fromJson(book));
+    }
+
+    return BooksData(booksData);
+  } catch (err) {
+    return Future.error("Error occured");
+  }
+}
+//}
