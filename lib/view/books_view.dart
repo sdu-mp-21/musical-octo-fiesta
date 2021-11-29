@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:BookStore/services/books.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'BookItem.dart';
+import 'item_view.dart';
 
 class Books extends StatefulWidget {
   Books(
@@ -14,12 +14,14 @@ class Books extends StatefulWidget {
   final Function callback;
 
   final String title;
+
   @override
   _MyBook createState() => new _MyBook();
 }
 
 class _MyBook extends State<Books> {
   ScrollController _scrollController;
+
   @override
   void initState() {
     super.initState();

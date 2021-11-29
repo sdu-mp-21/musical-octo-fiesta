@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:BookStore/models/book.dart';
-import 'package:BookStore/shop/bloc/shop_bloc.dart';
+import 'package:BookStore/bloc/cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +25,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShopBloc, ShopState>(
+    return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
         // if (state is ItemAddedCartState) {
         //   cartItems = state.cartItems;
@@ -134,7 +134,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           state.cartData.booksData
                                               .removeAt(index);
                                           calculateTotalAmount(cartItems);
-                                          BlocProvider.of<ShopBloc>(context)
+                                          BlocProvider.of<CartBloc>(context)
                                             ..add(ItemDeleteCartEvent(
                                                 cartItems:
                                                     state.cartData.booksData));
@@ -143,7 +143,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           state.cartItems.removeAt(index);
                                           calculateTotalAmount(cartItems);
 
-                                          BlocProvider.of<ShopBloc>(context)
+                                          BlocProvider.of<CartBloc>(context)
                                             ..add(ItemDeleteCartEvent(
                                                 cartItems: state.cartItems));
                                         } else if (state
@@ -151,7 +151,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           state.cartItems.removeAt(index);
                                           calculateTotalAmount(cartItems);
 
-                                          BlocProvider.of<ShopBloc>(context)
+                                          BlocProvider.of<CartBloc>(context)
                                             ..add(ItemDeleteCartEvent(
                                                 cartItems: state.cartItems));
                                         }

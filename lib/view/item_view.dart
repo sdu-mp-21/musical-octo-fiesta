@@ -2,12 +2,12 @@ import 'package:BookStore/models/book.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../bookpage.dart';
+import 'item_details_view.dart';
 
-class BookCard extends StatelessWidget {
+class BookItem extends StatelessWidget {
   final Book book;
 
-  BookCard(this.book);
+  BookItem(this.book);
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +19,18 @@ class BookCard extends StatelessWidget {
           );
         },
         child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(5),
             child: Stack(children: [
               SizedBox(
-                  width: 120,
+                  width: 180,
                   height: 230,
                   child: Column(children: [
                     DecoratedBox(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: CachedNetworkImage(
-                            height: 180,
-                            width: 150,
+                            height: 200,
+                            width: 210,
                             fit: BoxFit.cover,
                             imageUrl: book.image,
                             placeholder: (context, url) => Icon(Icons.image),
@@ -50,45 +50,12 @@ class BookCard extends StatelessWidget {
                             ),
                           ],
                         )),
-                    SizedBox(
-                      height: 5,
-                    ),
                     Text(
                       book.title,
                       style: TextStyle(fontWeight: FontWeight.w800),
                       overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      book.price.toString() + " ₸",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          color: Colors.black38),
-                    ),
+                    )
                   ])),
-              Positioned(
-                  top: 10,
-                  left: 0,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade600,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10),
-                          bottomRight: Radius.circular(10)),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          book.rating.toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  )),
             ])));
   }
 }

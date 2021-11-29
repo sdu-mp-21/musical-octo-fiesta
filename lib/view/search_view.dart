@@ -1,5 +1,5 @@
 import 'package:BookStore/services/books.dart';
-import 'package:BookStore/widgets/searchWidget/searchedBookWidget.dart';
+import 'package:BookStore/view/widgets/searched_book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 

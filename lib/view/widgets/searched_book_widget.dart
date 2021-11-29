@@ -2,7 +2,7 @@ import 'package:BookStore/models/book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../bookpage.dart';
+import '../item_details_view.dart';
 
 class SearchedBookWidget extends StatelessWidget {
   final Book book;

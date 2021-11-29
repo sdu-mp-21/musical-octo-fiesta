@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
-import 'search.dart';
-import 'home.dart';
-import 'basket.dart';
-import 'profile.dart';
+import 'view/search_view.dart';
+import 'view/home_view.dart';
+import 'view/basket_view.dart';
+import 'view/profile_view.dart';
 
 void main() => runApp(MyApp());
 

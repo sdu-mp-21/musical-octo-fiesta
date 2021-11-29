@@ -1,8 +1,8 @@
 import 'package:BookStore/models/book.dart';
-import 'package:BookStore/widgets/noBooksCard.dart';
 import 'package:flutter/cupertino.dart';
-import '../showMoreCard.dart';
-import 'bookCard.dart';
+import 'more_card_widget.dart';
+import 'no_books_card_widget.dart';
+import 'book_card_widget.dart';
 
 class BooksContainer extends StatelessWidget {
   final List<Book> books;

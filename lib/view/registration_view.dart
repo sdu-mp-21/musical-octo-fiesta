@@ -3,7 +3,7 @@ import 'package:BookStore/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
-import 'profile.dart';
+import 'profile_view.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key key}) : super(key: key);

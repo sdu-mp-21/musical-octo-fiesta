@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:BookStore/models/book.dart';
-import 'package:BookStore/product/shopping_cart.dart';
-import 'package:BookStore/shop/bloc/shop_bloc.dart';
+import 'package:BookStore/view/shopping_cart.dart';
+import 'package:BookStore/bloc/cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,9 +21,9 @@ class _ProductDetailState extends State<ProductDetail> {
   bool _itemselected = false;
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ShopBloc, ShopState>(
+    return BlocListener<CartBloc, CartState>(
       listener: (context, state) {},
-      child: BlocBuilder<ShopBloc, ShopState>(
+      child: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           if (state is ItemAddingCartState) {
             cartItems = state.cartItems;
@@ -186,7 +186,7 @@ class _ProductDetailState extends State<ProductDetail> {
 
                                             cartItems.add(cartItem);
 
-                                            BlocProvider.of<ShopBloc>(context)
+                                            BlocProvider.of<CartBloc>(context)
                                               ..add(ItemAddedCartEvent(
                                                   cartItems: cartItems));
 
@@ -200,7 +200,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                                 builder: (_) =>
                                                     BlocProvider.value(
                                                   value:
-                                                      BlocProvider.of<ShopBloc>(
+                                                      BlocProvider.of<CartBloc>(
                                                           context),
                                                   child: ShoppingCart(),
                                                 ),

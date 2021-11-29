@@ -1,7 +1,7 @@
-//import 'package:BookStore/books.dart';
-import 'package:BookStore/product/product_page.dart';
-//import 'package:BookStore/product/prooduct_detail.dart';
-import 'package:BookStore/shop/bloc/shop_bloc.dart';
+//import 'package:BookStore/books_view.dart';
+import '../product_page.dart';
+//import 'package:BookStore/product/product_detail.dart';
+// import 'package:BookStore/shop/bloc/cart_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,12 +15,8 @@ class ShowMoreCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => ShopBloc(),
-                child: ProductPage(),
-              ),
-            ),
-          );
+              builder: (context) => ProductPage(),
+            ));
         },
         child: Padding(
             padding: EdgeInsets.all(10),

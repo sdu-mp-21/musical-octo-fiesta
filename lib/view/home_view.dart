@@ -1,8 +1,8 @@
 import 'package:BookStore/models/genre.dart';
 import 'package:BookStore/services/books.dart';
 import 'package:BookStore/services/genres.dart';
-import 'package:BookStore/widgets/booksWidget/booksContainer.dart';
-import 'package:BookStore/widgets/welcomeCard.dart';
+import 'package:BookStore/view/widgets/books_container_widget.dart';
+import 'package:BookStore/view/widgets/welcome_card_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

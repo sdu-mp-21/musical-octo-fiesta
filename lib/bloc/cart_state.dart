@@ -1,35 +1,35 @@
-part of 'shop_bloc.dart';
+part of 'cart_bloc.dart';
 
-abstract class ShopState extends Equatable {
-  const ShopState();
+abstract class CartState extends Equatable {
+  const CartState();
 
   @override
   List<Object> get props => [];
 }
 
-class ShopInitial extends ShopState {}
+class CartInitial extends CartState {}
 
-class ShopPageLoadedState extends ShopState {
+class ShopPageLoadedState extends CartState {
   BooksData shopData;
   BooksData cartData;
 
   ShopPageLoadedState({this.cartData, this.shopData});
 }
 
-class ItemAddingCartState extends ShopState {
+class ItemAddingCartState extends CartState {
   BooksData cartData;
   List<Book> cartItems;
 
   ItemAddingCartState({this.cartData, this.cartItems});
 }
 
-class ItemAddedCartState extends ShopState {
+class ItemAddedCartState extends CartState {
   List<Book> cartItems;
 
   ItemAddedCartState({this.cartItems});
 }
 
-class ItemDeletingCartState extends ShopState {
+class ItemDeletingCartState extends CartState {
   List<Book> cartItems;
 
   ItemDeletingCartState({this.cartItems});

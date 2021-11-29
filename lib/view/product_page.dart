@@ -1,8 +1,8 @@
 import 'package:BookStore/models/book.dart';
-import 'package:BookStore/product/product_item.dart';
-import 'package:BookStore/product/prooduct_detail.dart';
-import 'package:BookStore/product/shopping_cart.dart';
-import 'package:BookStore/shop/bloc/shop_bloc.dart';
+import 'package:BookStore/view/product_item.dart';
+import 'package:BookStore/view/product_detail.dart';
+import 'package:BookStore/view/shopping_cart.dart';
+import 'package:BookStore/bloc/cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,9 +20,9 @@ class _ProductPageState extends State<ProductPage> {
   bool loadingData = true;
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ShopBloc, ShopState>(
+    return BlocListener<CartBloc, CartState>(
       listener: (context, state) {
-        if (state is ShopInitial) {
+        if (state is CartInitial) {
           loadingData = true;
         } else if (state is ShopPageLoadedState) {
           shopItems = state.shopData.booksData;
@@ -38,7 +38,7 @@ class _ProductPageState extends State<ProductPage> {
           loadingData = false;
         }
       },
-      child: BlocBuilder<ShopBloc, ShopState>(
+      child: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           print("produc page state: $state");
 
@@ -55,7 +55,7 @@ class _ProductPageState extends State<ProductPage> {
                     context,
                     MaterialPageRoute(
                         builder: (_) => BlocProvider.value(
-                            value: BlocProvider.of<ShopBloc>(context),
+                            value: BlocProvider.of<CartBloc>(context),
                             child: ShoppingCart())));
               },
               child: Text(
@@ -107,7 +107,7 @@ class _ProductPageState extends State<ProductPage> {
                                                     builder: (_) =>
                                                         BlocProvider.value(
                                                             value: BlocProvider
-                                                                .of<ShopBloc>(
+                                                                .of<CartBloc>(
                                                                     context)
                                                               ..add(ItemAddingCartEvent(
                                                                   cartItems:

@@ -1,24 +1,23 @@
 import 'dart:async';
-
 import 'package:BookStore/models/book.dart';
 import 'package:BookStore/services/books.dart';
-//import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'shop_event.dart';
-part 'shop_state.dart';
 
-class ShopBloc extends Bloc<ShopEvent, ShopState> {
+part 'cart_event.dart';
+part 'cart_state.dart';
+
+class CartBloc extends Bloc<CartEvent, CartState> {
   //s shopDataProvider = ShopDataProvider();
-  ShopBloc() : super(ShopInitial()) {
-    add(ShopPageInitializedEvent());
+  CartBloc() : super(CartInitial()) {
+    add(CartPageInitializedEvent());
   }
 
   @override
-  Stream<ShopState> mapEventToState(
-    ShopEvent event,
+  Stream<CartState> mapEventToState(
+    CartEvent event,
   ) async* {
-    if (event is ShopPageInitializedEvent) {
+    if (event is CartPageInitializedEvent) {
       BooksData shopData = await getShopItems();
       BooksData cartData = await getCartItems();
       yield ShopPageLoadedState(shopData: shopData, cartData: cartData);
