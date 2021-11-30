@@ -1,5 +1,6 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 
 const String API_URL = "https://musical-octo-fiesta.herokuapp.com/api/auth";
 

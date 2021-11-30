@@ -15,7 +15,7 @@ class ShowMoreCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductPage(),
+              builder: (context) => ProductPage(id: "61810b90bc157300169d63fd"),
             ));
         },
         child: Padding(
