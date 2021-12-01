@@ -20,6 +20,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     if (event is CartPageInitializedEvent) {
       BooksData shopData = await getShopItems();
       BooksData cartData = await getCartItems();
+      print(shopData);
+      print(cartData);
       yield ShopPageLoadedState(shopData: shopData, cartData: cartData);
     }
     if (event is ItemAddingCartEvent) {
