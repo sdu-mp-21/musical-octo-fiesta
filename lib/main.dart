@@ -4,9 +4,11 @@ import 'package:heroicons/heroicons.dart';
 import 'view/search_view.dart';
 import 'view/home_view.dart';
 import 'view/basket_view.dart';
-import 'view/profile_view.dart';
+import 'profile_view.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Books',
-      home: MyHomePage(),
+      home: Profile(),
     );
   }
 }
@@ -31,7 +33,6 @@ class _MyHomePageState extends State<MyHomePage> {
     Home(),
     Search(),
     Basket(),
-    Profile(),
   ];
 
   Widget build(BuildContext context) {
@@ -66,11 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Basket',
               icon: HeroIcon(HeroIcons.shoppingCart),
               activeIcon: HeroIcon(HeroIcons.shoppingCart, solid: true)),
-          BottomNavigationBarItem(
-            label: 'Profile',
-            icon: HeroIcon(HeroIcons.userCircle),
-            activeIcon: HeroIcon(HeroIcons.userCircle, solid: true),
-          ),
         ],
       ),
     );
