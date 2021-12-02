@@ -77,14 +77,12 @@ Future<BooksData> getShopItems() async {
     Uri uri = Uri.parse(API_URL);
     var response = await http.get(uri);
     var books = json.decode(response.body);
+    print('BOOKS: ${books}');
 
     List<Book> booksData = [];
 
     for (var book in books) {
       booksData.add(new Book.fromJson(book));
-    }
-    for (var book in books) {
-      print(book.id);
     }
 
     return BooksData(booksData);

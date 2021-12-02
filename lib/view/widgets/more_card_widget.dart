@@ -1,4 +1,6 @@
 //import 'package:BookStore/books_view.dart';
+import 'package:BookStore/bloc/cart_bloc.dart';
+
 import '../product_page.dart';
 //import 'package:BookStore/product/product_detail.dart';
 // import 'package:BookStore/shop/bloc/cart_bloc.dart';
@@ -15,8 +17,12 @@ class ShowMoreCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductPage(id: "61810b90bc157300169d63fd"),
-            ));
+              builder: (context) => BlocProvider(
+                create: (context) => CartBloc(),
+                child: ProductPage(),
+              ),
+            ),
+          );
         },
         child: Padding(
             padding: EdgeInsets.all(10),

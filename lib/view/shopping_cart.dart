@@ -15,9 +15,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void calculateTotalAmount(List<Book> list) {
     double res = 0;
 
+    // print('LIST PRICE: ${list[0].price} QUANTITY: ${list[0].quantity}');
+
     list.forEach((element) {
-      res = res + element.price * element.quantity;
-      print(element.price);
+      res = res + element.price;
+      // print(element.price);
     });
 
     totalAmount = res;
@@ -27,23 +29,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
-        // if (state is ItemAddedCartState) {
-        //   cartItems = state.cartItems;
-        //   calculateTotalAmount(cartItems);
-        // }
-        // if (state is ShopPageLoadedState) {
-        //   cartItems = state.cartData.booksData;
-        //   calculateTotalAmount(cartItems);
-        // }
-        // if (state is ItemDeletingCartState) {
-        //   cartItems = state.cartItems;
-        //   calculateTotalAmount(cartItems);
-        // }
+        if (state is ItemAddedCartState) {
+          cartItems = state.cartItems;
+          calculateTotalAmount(cartItems);
+        }
+        if (state is ShopPageLoadedState) {
+          // print('THIS IS STATE CARTDATA: ${state.cartData.booksData}');
+          cartItems = state.cartData.booksData;
+          print(cartItems);
+          calculateTotalAmount(cartItems);
+        }
+        if (state is ItemDeletingCartState) {
+          cartItems = state.cartItems;
+          calculateTotalAmount(cartItems);
+        }
 
-        // if (state is ItemAddingCartState) {
-        //   cartItems = state.cartItems;
-        //   calculateTotalAmount(cartItems);
-        // }
+        if (state is ItemAddingCartState) {
+          cartItems = state.cartItems;
+          calculateTotalAmount(cartItems);
+        }
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -197,8 +201,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     },
                                   ),
                                   Spacer(),
-                                  Text(
-                                      '\$${cartItems[index].price * cartItems[index].quantity} ')
+                                  Text('\$${cartItems[index].price} ')
                                 ],
                               ),
                             ],
