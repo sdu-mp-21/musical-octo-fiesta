@@ -25,12 +25,8 @@ class _MyBasket extends State<Basket> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/baner2.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(),
       child: FutureBuilder(
           future: getAllBooks(),
           builder: (context, snapshot) {
