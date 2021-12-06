@@ -87,6 +87,10 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Basket',
               icon: HeroIcon(HeroIcons.shoppingCart),
               activeIcon: HeroIcon(HeroIcons.shoppingCart, solid: true)),
+          BottomNavigationBarItem(
+              label: 'Profile',
+              icon: HeroIcon(HeroIcons.userCircle),
+              activeIcon: HeroIcon(HeroIcons.userCircle, solid: true)),
         ],
       ),
     );
