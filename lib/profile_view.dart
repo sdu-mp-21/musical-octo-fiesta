@@ -1,12 +1,62 @@
 import 'package:BookStore/main.dart';
 import 'package:BookStore/services/auth.dart';
+import 'package:BookStore/view/home_view.dart';
 import 'package:BookStore/view/registration_view.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  ProfileState createState() {
+    return new ProfileState();
+  }
+}
+
+class ProfileState extends State<Profile> {
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  bool _validate = false;
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
   String email;
   String password;
-  String token = "";
+
+  doLogin() async {
+    if(_email.text.isEmpty || _password.text.isEmpty) {
+      setState(() {
+        _validate = true;
+      });
+    } else {
+      setState(() {
+        _validate = false;
+      });
+      try {
+        String token = await login(this.email, password);
+        setToken(token);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MyHomePage()));
+        print("Successful login");
+      } catch (err) {
+        Fluttertoast.showToast(
+            msg: "Error",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +80,10 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   height: 95,
                 ),
-                TextFormField(
+                TextField(
+                  controller: _email,
                   decoration: InputDecoration(
+                    errorText: _validate ? 'Value Can\'t Be Empty' : null,
                     labelText: 'Email Address',
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.email),
@@ -43,35 +95,20 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                TextFormField(
+                TextField(
+                  controller: _password,
                   obscureText: true,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Password',
+                    errorText: _validate ? 'Value Can\'t Be Empty' : null,
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye),
                   ),
                   onChanged: (password) {
                     this.password = password;
                   },
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        print('Forgotted Password!');
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.4),
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
                 SizedBox(
                   height: 15,
                 ),
@@ -83,19 +120,7 @@ class Profile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: MaterialButton(
-                    onPressed: () async {
-                      token = await login(email, password);
-                      // print(token);
-                      if (token.length > 5) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyHomePage()));
-                      } else {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyApp()));
-                      }
-                    },
+                    onPressed: () => doLogin(),
                     color: Colors.blue,
                     child: Text(
                       'LOGIN',

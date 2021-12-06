@@ -1,3 +1,4 @@
+import 'package:BookStore/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
@@ -17,7 +18,26 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       title: 'Books',
-      home: Profile(),
+      home: FutureBuilder(
+          future: getToken(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(
+                  child: SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1.5,
+                    ),
+                  ),
+                );
+              case ConnectionState.done:
+                return snapshot.data != "" ? Home() : Profile();
+              default:
+                return Container();
+            }
+          }),
     );
   }
 }
