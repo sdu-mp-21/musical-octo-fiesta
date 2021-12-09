@@ -14,14 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<Home> {
-  String currentGenre = "61810b90bc157300169d63fd";
-
-  void changeGenre(id) {
-    setState(() {
-      currentGenre = id;
-    });
-  }
-
+  
   Widget section(String genreId) {
     return FutureBuilder(
         future: getBooksByGenre(genreId),
