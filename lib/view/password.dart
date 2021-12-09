@@ -5,12 +5,12 @@ import 'package:BookStore/view/registration_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Password extends StatelessElement {
-  Password(StatelessWidget widget) : super(widget);
+class Password extends StatelessWidget {
   var _password = TextEditingController();
 
   @override
-  Widget build() {
+  Widget build(BuildContext context) {
+    // TODO: implement build
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -34,7 +34,7 @@ class Password extends StatelessElement {
                 decoration: InputDecoration(
                   labelText: 'Enter password',
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: Icon(Icons.lock),
                 ),
               ),
               SizedBox(

@@ -2,8 +2,10 @@ import 'package:BookStore/main.dart';
 import 'package:BookStore/services/auth.dart';
 import 'package:BookStore/view/home_view.dart';
 import 'package:BookStore/view/registration_view.dart';
+import 'package:BookStore/view/password.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:BookStore/view/password.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -194,7 +196,7 @@ _displayDialog(BuildContext context) async {
               child: new Text('Send'),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Registration()));
+                    MaterialPageRoute(builder: (context) => Password()));
               },
             )
           ],
