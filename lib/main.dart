@@ -1,4 +1,5 @@
 import 'package:BookStore/services/auth.dart';
+import 'package:BookStore/view/user_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
@@ -53,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Home(),
     Search(),
     Basket(),
+    UserProfile()
   ];
 
   Widget build(BuildContext context) {
