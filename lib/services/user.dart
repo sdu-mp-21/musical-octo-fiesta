@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:BookStore/models/user.dart';
+import 'package:BookStore/services/auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -32,10 +33,21 @@ Future<void> createUser(
 
 Future<User> getUser() async {
   Uri uri = Uri.parse("$API_URL/me");
-  var response = await http.get(uri);
-  var body = json.decode(response.body);
+  String token = await getToken();
 
-  User user = User.fromJson(body);
+  final headers = {
+    HttpHeaders.contentTypeHeader: 'application/json',
+    "x-auth-token": token
+  };
 
-  return user;
+  http.Response response = await http.get(uri, headers: headers);
+  if (response.statusCode == 200) {
+    var body = json.decode(response.body);
+    User user = User.fromJson(body);
+    return user;
+  } else {
+    print(response.statusCode);
+    print(response.body);
+    throw Exception('Failed to get data about user');
+  }
 }
