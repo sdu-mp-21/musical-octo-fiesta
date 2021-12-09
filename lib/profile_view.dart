@@ -28,7 +28,7 @@ class ProfileState extends State<Profile> {
   String password;
 
   doLogin() async {
-    if(_email.text.isEmpty || _password.text.isEmpty) {
+    if (_email.text.isEmpty || _password.text.isEmpty) {
       setState(() {
         _validate = true;
       });
@@ -40,9 +40,7 @@ class ProfileState extends State<Profile> {
         String token = await login(this.email, password);
         setToken(token);
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MyHomePage()));
+            context, MaterialPageRoute(builder: (context) => MyHomePage()));
         print("Successful login");
       } catch (err) {
         Fluttertoast.showToast(
@@ -52,8 +50,7 @@ class ProfileState extends State<Profile> {
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
             textColor: Colors.white,
-            fontSize: 16.0
-        );
+            fontSize: 16.0);
       }
     }
   }
@@ -108,7 +105,6 @@ class ProfileState extends State<Profile> {
                     this.password = password;
                   },
                 ),
-
                 SizedBox(
                   height: 15,
                 ),
@@ -132,7 +128,17 @@ class ProfileState extends State<Profile> {
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 15,
+                ),
+                TextButton(
+                  onPressed: () {
+                    _displayDialog(context);
+                  },
+                  child: Text('Forgot password',
+                      style: TextStyle(color: Colors.blue)),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Divider(
                   color: Colors.black,
@@ -167,4 +173,31 @@ class ProfileState extends State<Profile> {
       ),
     );
   }
+}
+
+TextEditingController _textFieldController = TextEditingController();
+
+_displayDialog(BuildContext context) async {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Reset password'),
+          content: TextField(
+            controller: _textFieldController,
+            textInputAction: TextInputAction.go,
+            keyboardType: TextInputType.numberWithOptions(),
+            decoration: InputDecoration(hintText: "Enter your email"),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text('Send'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Registration()));
+              },
+            )
+          ],
+        );
+      });
 }

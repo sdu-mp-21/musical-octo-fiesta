@@ -49,11 +49,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
-  final arr = [
-    Home(),
-    Search(),
-    Basket(),
-  ];
+  final arr = [Home(), Search(), Basket(), Search()];
 
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
