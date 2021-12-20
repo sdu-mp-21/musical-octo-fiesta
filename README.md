@@ -17,3 +17,11 @@
 **Who's our target audience?**
 ----------
 
+- Our target audience is readers who want to search for, buy and discover books in a language of its origin.
+
+**Goals**
+----------
+
+- Understanding the fundamentals of hybrid mobile development in Flutter
+- Understanding the interconnection between client and server
+- Learn and implement programming patterns to meet application requirements
